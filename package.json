@@ -1,0 +1,30 @@
+{
+  "name": "blog",
+  "version": "1.0.0",
+  "description": "",
+  "keywords": [
+    "f8",
+    "node",
+    "hoc",
+    "js",
+    "blog"
+  ],
+  "homepage": "https://github.com/buiduc9918/blog#readme",
+  "bugs": {
+    "url": "https://github.com/buiduc9918/blog/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/buiduc9918/blog.git"
+  },
+  "license": "ISC",
+  "author": "mr duck",
+  "type": "commonjs",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "express": "^5.2.1"
+  }
+}
