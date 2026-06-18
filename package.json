@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "start": "node --inspect src/index.js",
-    "watch": "sass -w src/resource/scss/: -o src/public/css/"
+    "watch": "sass -w src/resource/scss/:src/public/css/"
   },
   "dependencies": {
     "cookie-parser": "~1.4.4",
