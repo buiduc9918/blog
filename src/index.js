@@ -10,6 +10,11 @@ const port = 3000;
 
 app.use(express.static(path.join(__dirname, 'public')));
 
+// Middleware parse application/x-www-form-urlencoded
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
+
+
 app.use(morgan('combined'));
 
 app.engine('.hbs', handlebars.engine({extname: '.hbs'}));
@@ -23,16 +28,22 @@ app.get('/', (req, res) => {
 });
 
 app.get('/news', (req, res) => {
-  console.log('query: ', req.query.q);
-
   res.render('news');
 });
 
 app.get('/search', (req, res) => {
-  console.log('query: ', req.query.q);
+  console.log(req.query.q);
   res.render('search');
 });
 
+app.post('/search', (req, res) => {
+
+
+  console.log(req.body);
+
+
+  res.send('');
+});
 
 app.listen(port, () => {
   console.log(`Example app listening on port http://localhost:${port}`);
