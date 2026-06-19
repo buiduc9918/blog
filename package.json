@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "node --inspect src/index.js",
+    "start": "nodemon --inspect src/index.js",
     "watch": "sass -w src/resource/scss/:src/public/css/"
   },
   "dependencies": {
