@@ -1,6 +1,5 @@
-@import 'variable';
-.test{
+@use 'variable' as v;
+.test {
     font-size: 1rem;
-    background-color: $red_color;
+    background-color: v.$red_color;
 }
-
