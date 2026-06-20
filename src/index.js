@@ -5,6 +5,9 @@ const handlebars = require('express-handlebars');
 const app = express();
 const port = 3000;
 const route = require('./routes/index');
+const db = require('./config/db');
+// Connect to DB
+db.connect();
 
 app.use(express.static(path.join(__dirname, 'public')));
 // Middleware parse application/x-www-form-urlencoded
