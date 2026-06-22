@@ -143,10 +143,14 @@ app.listen(port, () => {
   console.log(`Example app listening on port http://localhost:${port}`);
 });
 
-
-
-
-
+Bước 9: Tóm tắt các bước vừa làm
+- Sửa `SiteController.index()` để lấy đúng dữ liệu từ MongoDB và chuyển đổi thành object.
+- Thêm phương thức `store()` để tạo khóa học mới bằng POST `/store`.
+- Thêm route `router.post('/store', siteController.store)` trong `src/routes/site.js`.
+- Tạo file seed `src/config/seed.js` và thêm script `npm run seed` vào `package.json`.
+- Cập nhật dữ liệu mẫu với ảnh thực tế và sửa URL ảnh lỗi.
+- Thêm style SCSS cho header: nền đen và chữ trắng.
+- Đảm bảo CSS header được viết trong `src/resource/scss/app.scss` thay vì chỉ chỉnh trong file biên dịch.
 
 
 

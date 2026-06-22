@@ -4,7 +4,8 @@
   "private": true,
   "scripts": {
     "start": "nodemon --inspect src/index.js",
-    "watch": "sass -w src/resource/scss/:src/public/css/"
+    "watch": "sass -w src/resource/scss/:src/public/css/",
+    "seed": "node src/config/seed.js"
   },
   "dependencies": {
     "cookie-parser": "~1.4.4",

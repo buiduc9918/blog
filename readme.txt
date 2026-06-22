@@ -10,4 +10,8 @@ creat model
 4,
 screm la tao model de tao ra cac mo hinh cho cac ung dung chung ta su dung cho cac ung dung,
 
+5, them next vao phuong thuc de xu li logic
+them cac linh lay du lieu file home< chuyen du lieu>
+lay du lieu nhan anh tu web
+
 
