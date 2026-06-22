@@ -1,0 +1,151 @@
+Bước 1 tạo file  js để điều hành ứng dụng ,
+trong đó :
+const là hằng để báo các thư viện.
+port là để khai báo cổng để sử dụng các test ưeb
+express là thư viện mà dự án xây dụng theo.
+node là môi trường điều hành các dự án backend mà bản thân sử dụng 
+file package.json de khai bao cac thu vien su dung va cac thu vien phuj thuoc
+file package-lock.json khai bao cau hinh du an 
+
+
+sau khi cai file 
+B2 them thu vien express
+
+npm i express
+
+de them thu vien express
+them path de dieu huong file.
+
+chay demo
+them morgan, them handlebar de taoj file giao dien 
+them nodemon de cap nhay code sau khi luu code update code lien tuc va auto
+them sass de bien dich file scss sang dinh dang css
+them prettier de lam dep code
+them lint-staged de goi prettier, cau hinh goi prettier moi khi khoi chay
+them husky de goi lint-staged goi lint-staged khi day len git
+express-handlebar thiet lap giao dien.
+va them 
+http-errors , jade  de debug cac phan mem hien nen cac thong bao ngay tren cac terminal de quan tri tong quat
+mongoose giup giao tiep controller voi database
+
+ chay 
+ npm i cho tung thu vien luu i :
+
+tuy tung thu vien ma phai phan bo
+    cho cac moi truong khac nhau nhu::
+    + moi trung app 
+    + moi truong dev;
+B3
+Phan bo cac teo va dinh huong theo src(source)
+trong source co folder
++ app de dinh huong  setup database
++ config de ket noi database 
++ public luu cac file static (file cung)
++ resource luu cac file giao dien
++ route la dinh huong cac duong di
+B4
+app se co 
+    controller la cac action theo duong link goi
+    model la cau hinh lop du lieu lay ra
+config se co
+    dieu huong database ma chung ta su dung
+public co
+     css luu file giap dien css
+     image, sound luu tru cacfile anh am thanh va giao dien
+resource luu tru cac file tai nguyen
+     scss luu tru cac file scss taiu nguyen cau hinh mau cac giao dien
+     views luu tru cac giao dien trong folder thi the hien cac file  su dung trong cac trailing
+                ben ngoai la luu tru phan body lien ket cac 
+                layout luu tru main lien ket cac phan con lai qua
+                 cau hinh duoi
+                          {{>header  }}
+                            <container class="container">
+                             {{{body}}} 
+                             </container>
+                          {{>footer}}
+                them de du dung botrap 
+                 <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+                 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+                 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.min.js" integrity="sha384-+sLIOodYLS7CIrQpBjl+C7nPvqq+FbNUBDunl/OZv93DB7Ln/533i8e/mZXLi/P+" crossorigin="anonymous"></script>
+can thuc hien can hieu ve cac giao dien goi cac file nhu res req cua giao thuc http cac cach chay chay du lieu theo may chu hay chay theo client de thiet lap du an
+ sau dos se co kien thuc ve q vidu de liet lap dieu huong trang web vd :
+    http:localhost//news?abc trong abc la 1 querry der tim kiem 
+B5 thiet lap cau hinh mvc (model-view-controller trong do controler giao voi browser giantiep qua : dispater(dieu huong hanh dong)-router(dieu huong duong di)-webserver(server thu nghiem server local thuc te la chinh may tinh cua ban than cung la 1 server) )
+trong do :
+      index.js/db/config dieu huong database su dung
+      resources,public la luu phan view 
+      router la dieu huong huong di cua link phan view cua web
+      app la dieu huong dieu huoung du lieu , bam du lieu tu database cho phan views
+      index.js/src la file controller dieu huong tat ca
+va viec fieu huong cac path file rat quan trong . package.json
+    {
+  "name": "blog",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "start": "nodemon --inspect src/index.js",
+    "watch": "sass -w src/resource/scss/:src/public/css/"
+  },
+  "dependencies": {
+    "cookie-parser": "~1.4.4",
+    "debug": "~2.6.9",
+    "express": "~4.16.1",
+    "http-errors": "~1.6.3",
+    "jade": "~1.11.0",
+    "mongoose": "^9.7.1"
+  },
+  "devDependencies": {
+    "express-handlebars": "^9.0.1",
+    "husky": "^9.1.7",
+    "lint-staged": "^17.0.7",
+    "morgan": "^1.11.0",
+    "nodemon": "^3.1.14",
+    "prettier": "^3.8.4",
+    "sass": "^1.101.0"
+  },
+  "lint-staged": {
+    "src/**/*.{js,json}": "prettier --tab-width 4 --write --single-quote --trailing-comma all"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  }
+}
+
+
+index.js/src 
+  const path = require('path');
+const express = require('express');
+const morgan = require('morgan');
+const handlebars = require('express-handlebars');
+const app = express();
+const port = 3000;
+const route = require('./routes/index');
+const db = require('./config/db');
+// Connect to DB
+db.connect();
+
+app.use(express.static(path.join(__dirname, 'public')));
+// Middleware parse application/x-www-form-urlencoded
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
+app.use(morgan('combined'));
+app.engine('.hbs', handlebars.engine({ extname: '.hbs' }));
+app.set('view engine', 'hbs');
+app.set('views', path.join(__dirname, 'resource/views'));
+console.log('path: ', path.join(__dirname, 'resource/views'));
+// Route init
+route(app);
+
+app.listen(port, () => {
+    console.log(`Example app listening on port http://localhost:${port}`);
+});
+
+
+
+
+
+
+
+

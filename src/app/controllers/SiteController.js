@@ -6,7 +6,7 @@ class SiteController {
     // [GET] /
     async index(req, res) {
         try {
-         const filter = {};
+            const filter = {};
             const courses = await Course.find(filter);
             console.log('Course filter:', filter, 'resultCount:', courses.length);
             res.json(courses);
