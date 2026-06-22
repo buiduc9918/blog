@@ -1,84 +1,86 @@
-Bước 1 tạo file  js để điều hành ứng dụng ,
-trong đó :
-const là hằng để báo các thư viện.
-port là để khai báo cổng để sử dụng các test ưeb
-express là thư viện mà dự án xây dụng theo.
-node là môi trường điều hành các dự án backend mà bản thân sử dụng 
-file package.json de khai bao cac thu vien su dung va cac thu vien phuj thuoc
-file package-lock.json khai bao cau hinh du an 
+Bước 1: Tạo file JS điều hành ứng dụng
+- Định nghĩa các biến cơ bản:
+  + const: hằng số dùng để khai báo thư viện
+  + port: cổng chạy ứng dụng
+  + express: thư viện backend chính
+  + node: môi trường chạy JavaScript phía server
+- Tạo file `package.json` để khai báo thư viện và phụ thuộc
+- `package-lock.json` lưu cấu hình phiên bản phụ thuộc chính xác
 
+Bước 2: Cài đặt thư viện cơ bản
+- Cài Express:
+  npm i express
+- Thêm `path` để xử lý đường dẫn file
+- Cài các thư viện hỗ trợ:
+  + morgan: ghi log HTTP
+  + express-handlebars: template engine
+  + nodemon: tự động reload khi lưu code
+  + sass: biên dịch SCSS sang CSS
+  + prettier: định dạng code
+  + lint-staged: chạy prettier trước khi commit
+  + husky: chạy lint-staged khi push/commit
+  + http-errors, jade: debug và xử lý lỗi
+  + mongoose: kết nối database với model/controller
 
-sau khi cai file 
-B2 them thu vien express
+Lưu ý khi cài đặt:
+- Phân loại gói cho môi trường khác nhau:
+  + dependencies: thư viện dùng ở production
+  + devDependencies: công cụ chỉ dùng khi phát triển
 
-npm i express
+Bước 3: Tổ chức cấu trúc thư mục theo `src`
+Trong `src` nên có:
+- `app/`: cấu hình và khởi tạo ứng dụng, kết nối database
+- `config/`: cấu hình database và môi trường
+- `public/`: chứa file tĩnh như CSS, ảnh, JavaScript client
+- `resource/`: chứa file giao diện
+- `routes/`: định nghĩa các đường dẫn
 
-de them thu vien express
-them path de dieu huong file.
+Bước 4: Phân chia chức năng MVC
+- `app`:
+  + `controllers/`: xử lý các action theo route
+  + `model/`: định nghĩa cấu trúc dữ liệu và truy vấn database
+- `config`:
+  + cấu hình database và môi trường ứng dụng
+- `public`:
+  + `css/`: lưu file giao diện CSS
+  + `image/`, `sound/`: lưu ảnh, âm thanh và tài nguyên tĩnh khác
+- `resource`:
+  + `scss/`: chứa file SCSS và biến giao diện
+  + `views/`: chứa template view và layout
+    * layout chính (`main`) chứa phần header/footer và body
+    * template con sẽ được chèn vào `{{{body}}}`
 
-chay demo
-them morgan, them handlebar de taoj file giao dien 
-them nodemon de cap nhay code sau khi luu code update code lien tuc va auto
-them sass de bien dich file scss sang dinh dang css
-them prettier de lam dep code
-them lint-staged de goi prettier, cau hinh goi prettier moi khi khoi chay
-them husky de goi lint-staged goi lint-staged khi day len git
-express-handlebar thiet lap giao dien.
-va them 
-http-errors , jade  de debug cac phan mem hien nen cac thong bao ngay tren cac terminal de quan tri tong quat
-mongoose giup giao tiep controller voi database
+Ví dụ cấu trúc layout Handlebars:
+  {{> header}}
+  <div class="container">
+    {{{body}}}
+  </div>
+  {{> footer}}
 
- chay 
- npm i cho tung thu vien luu i :
+Với Bootstrap, thêm các script cần thiết vào layout:
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.min.js"></script>
 
-tuy tung thu vien ma phai phan bo
-    cho cac moi truong khac nhau nhu::
-    + moi trung app 
-    + moi truong dev;
-B3
-Phan bo cac teo va dinh huong theo src(source)
-trong source co folder
-+ app de dinh huong  setup database
-+ config de ket noi database 
-+ public luu cac file static (file cung)
-+ resource luu cac file giao dien
-+ route la dinh huong cac duong di
-B4
-app se co 
-    controller la cac action theo duong link goi
-    model la cau hinh lop du lieu lay ra
-config se co
-    dieu huong database ma chung ta su dung
-public co
-     css luu file giap dien css
-     image, sound luu tru cacfile anh am thanh va giao dien
-resource luu tru cac file tai nguyen
-     scss luu tru cac file scss taiu nguyen cau hinh mau cac giao dien
-     views luu tru cac giao dien trong folder thi the hien cac file  su dung trong cac trailing
-                ben ngoai la luu tru phan body lien ket cac 
-                layout luu tru main lien ket cac phan con lai qua
-                 cau hinh duoi
-                          {{>header  }}
-                            <container class="container">
-                             {{{body}}} 
-                             </container>
-                          {{>footer}}
-                them de du dung botrap 
-                 <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
-                 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
-                 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.min.js" integrity="sha384-+sLIOodYLS7CIrQpBjl+C7nPvqq+FbNUBDunl/OZv93DB7Ln/533i8e/mZXLi/P+" crossorigin="anonymous"></script>
-can thuc hien can hieu ve cac giao dien goi cac file nhu res req cua giao thuc http cac cach chay chay du lieu theo may chu hay chay theo client de thiet lap du an
- sau dos se co kien thuc ve q vidu de liet lap dieu huong trang web vd :
-    http:localhost//news?abc trong abc la 1 querry der tim kiem 
-B5 thiet lap cau hinh mvc (model-view-controller trong do controler giao voi browser giantiep qua : dispater(dieu huong hanh dong)-router(dieu huong duong di)-webserver(server thu nghiem server local thuc te la chinh may tinh cua ban than cung la 1 server) )
-trong do :
-      index.js/db/config dieu huong database su dung
-      resources,public la luu phan view 
-      router la dieu huong huong di cua link phan view cua web
-      app la dieu huong dieu huoung du lieu , bam du lieu tu database cho phan views
-      index.js/src la file controller dieu huong tat ca
-va viec fieu huong cac path file rat quan trong . package.json
-    {
+Bước 5: Hiểu cách hoạt động của web và routing
+- Hiểu `req`, `res` trong HTTP
+- Hiểu cách dữ liệu chạy giữa client và server
+- Ví dụ: `http://localhost/news?abc=...` dùng query để tìm kiếm
+
+Bước 6: Thiết lập mô hình MVC
+- Model View Controller:
+  + Controller giao tiếp với Browser qua router và dispatcher
+  + Router định nghĩa đường dẫn đến action
+- Cấu trúc ứng dụng:
+  + `src/index.js`: điểm vào chính của server
+  + `config/db/`: cấu hình kết nối database
+  + `resource/` và `public/`: chứa view và file tĩnh
+  + `routes/`: điều hướng các link của web
+  + `app/`: điều hướng dữ liệu, lấy dữ liệu từ DB và render view
+  + `src/app/controllers`: chứa controller xử lý logic
+
+Bước 7: Ví dụ `package.json`
+{
   "name": "blog",
   "version": "0.0.0",
   "private": true,
@@ -113,9 +115,8 @@ va viec fieu huong cac path file rat quan trong . package.json
   }
 }
 
-
-index.js/src 
-  const path = require('path');
+Bước 8: Ví dụ `src/index.js`
+const path = require('path');
 const express = require('express');
 const morgan = require('morgan');
 const handlebars = require('express-handlebars');
@@ -123,23 +124,23 @@ const app = express();
 const port = 3000;
 const route = require('./routes/index');
 const db = require('./config/db');
+
 // Connect to DB
 db.connect();
 
 app.use(express.static(path.join(__dirname, 'public')));
-// Middleware parse application/x-www-form-urlencoded
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(morgan('combined'));
 app.engine('.hbs', handlebars.engine({ extname: '.hbs' }));
 app.set('view engine', 'hbs');
 app.set('views', path.join(__dirname, 'resource/views'));
-console.log('path: ', path.join(__dirname, 'resource/views'));
+
 // Route init
 route(app);
 
 app.listen(port, () => {
-    console.log(`Example app listening on port http://localhost:${port}`);
+  console.log(`Example app listening on port http://localhost:${port}`);
 });
 
 
