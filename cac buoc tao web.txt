@@ -151,6 +151,20 @@ Bước 9: Tóm tắt các bước vừa làm
 - Cập nhật dữ liệu mẫu với ảnh thực tế và sửa URL ảnh lỗi.
 - Thêm style SCSS cho header: nền đen và chữ trắng.
 - Đảm bảo CSS header được viết trong `src/resource/scss/app.scss` thay vì chỉ chỉnh trong file biên dịch.
+Buoc 10
+Ghi chú (2026-06-23):
+- Sửa `CourseController` để tránh lỗi render và trả đúng dữ liệu cho view.
+- Cập nhật model `src/app/model/Course.js`: thêm trường `videoID` (sửa lỗi gõ trước đó).
+- Cập nhật `src/config/seed.js`: thêm `videoID` cho từng course, tạo slug, và kết nối/đóng DB an toàn.
+- Cập nhật view `src/resource/views/courses/show.hbs`:
+  - Hiển thị `course.image` (thumbnail) và `course.name`.
+  - Sử dụng iframe động với `{{course.videoID}}`.
+  - Thêm hiệu ứng cho nút (pulse, icon slide/rotate, sparkles) và điều chỉnh vị trí nút/thumbnail.
+- Hướng dẫn kiểm tra nhanh:
+  1. Cài phụ thuộc: `npm install`
+  2. Seed dữ liệu: `node src/config/seed.js`
+  3. Chạy app: `npm start` rồi mở `http://localhost:3000/courses/<slug>`
+- Lưu ý: đảm bảo MongoDB đang chạy; nếu thiếu module (ví dụ `morgan`, `express-handlebars`) chạy `npm install <module>`.
 
 
 
