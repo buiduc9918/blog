@@ -14,4 +14,4 @@ screm la tao model de tao ra cac mo hinh cho cac ung dung chung ta su dung cho c
 them cac linh lay du lieu file home< chuyen du lieu>
 lay du lieu nhan anh tu web
 6, them video hoan thien phan web khoa hoc va hoc them nhung video
-
+7, lien ket data tao them trang web them khóa học

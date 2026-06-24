@@ -1,0 +1,110 @@
+<div class="container mt-5 mb-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-8 col-md-10">
+            <div class="card shadow-lg border-0" style="border-radius: 12px; overflow: hidden;">
+                <!-- Card Header -->
+                <div
+                    style="background: linear-gradient(135deg, #3498db, #2980b9); padding: 30px; color: white; text-align: center;">
+                    <h2 style="margin: 0; font-weight: 600; letter-spacing: 0.5px;">📚 Tạo Khóa Học Mới</h2>
+                    <p style="margin-top: 8px; opacity: 0.9; font-size: 14px;">Chia sẻ kiến thức của bạn với cộng đồng
+                    </p>
+                </div>
+
+                <!-- Form Body -->
+                <div style="padding: 30px;">
+                    <form action="/courses/store" method="POST">
+                        <!-- Course Name -->
+                        <div class="mb-4">
+                            <label for="courseName" class="form-label"
+                                style="font-weight: 600; color: #2c3e50; margin-bottom: 8px;">
+                                📖 Tên Khóa Học
+                            </label>
+                            <input type="text" id="courseName" name="name" class="form-control"
+                                placeholder="VD: JavaScript Cơ Bản" required
+                                style="border-radius: 8px; border: 2px solid #e8e8e8; padding: 10px 12px; transition: all 0.3s ease;">
+                            <small class="form-text text-muted" style="margin-top: 4px;">Tên khóa học phải ngắn gọn, dễ
+                                nhớ</small>
+                        </div>
+                        <!-- Description -->
+                        <div class="mb-4">
+                            <label for="courseDesc" class="form-label"
+                                style="font-weight: 600; color: #2c3e50; margin-bottom: 8px;">
+                                ✍️ Mô Tả Khóa Học
+                            </label>
+                            <textarea id="courseDesc" name="description" class="form-control" rows="4"
+                                placeholder="Mô tả chi tiết về nội dung, đối tượng học viên, mục tiêu..."
+                                style="border-radius: 8px; border: 2px solid #e8e8e8; padding: 10px 12px; transition: all 0.3s ease; font-family: inherit;"
+                                required></textarea>
+                            <small class="form-text text-muted" style="margin-top: 4px;">Mô tả từ 50-500 ký tự</small>
+                        </div>
+                        <!-- VideoID -->
+                        <div class="mb-4">
+                            <label for="videoID" class="form-label"
+                                style="font-weight: 600; color: #2c3e50; margin-bottom: 8px;">
+                                🎥 Video ID (YouTube)
+                            </label>
+                            <input type="text" id="videoID" name="videoID" class="form-control"
+                                placeholder="VD: LnTPJcUQdNU" required
+                                style="border-radius: 8px; border: 2px solid #e8e8e8; padding: 10px 12px; transition: all 0.3s ease;">
+                            <small class="form-text text-muted" style="margin-top: 4px;">ID từ YouTube URL:
+                                youtube.com/watch?v=<strong>LnTPJcUQdNU</strong></small>
+                        </div>
+                        <!-- Level -->
+                        <div class="mb-4">
+                            <label for="courseLevel" class="form-label"
+                                style="font-weight: 600; color: #2c3e50; margin-bottom: 8px;">
+                                🧭 Mức độ khóa học
+                            </label>
+                            <select id="courseLevel" name="level" class="form-control"
+                                style="border-radius: 8px; border: 2px solid #e8e8e8; padding: 10px 12px; transition: all 0.3s ease; background: white;"
+                                required>
+                                <option value="">Chọn cấp độ</option>
+                                <option value="Beginner">Beginner</option>
+                                <option value="Intermediate">Intermediate</option>
+                                <option value="Advanced">Advanced</option>
+                            </select>
+                            <small class="form-text text-muted" style="margin-top: 4px;">Chọn độ khó phù hợp cho khóa
+                                học.</small>
+                        </div>
+                        <!-- Submit Button -->
+                        <div class="d-grid gap-2 mt-5">
+                            <button type="submit" class="btn btn-lg shadow-sm"
+                                style="background: linear-gradient(135deg, #3498db, #2980b9); color: white; border: none; border-radius: 8px; font-weight: 600; letter-spacing: 0.5px; padding: 12px 24px; transition: all 0.3s ease;">
+                                ✨ Tạo Khóa Học
+                            </button>
+                        </div>
+
+                        <!-- Cancel Link -->
+                        <div class="text-center mt-3">
+                            <a href="/" class="text-decoration-none" style="color: #7f8c8d; font-size: 14px;">← Quay lại
+                                trang chính</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Style for input focus -->
+            <style>
+                .form-control:focus {
+                    border-color: #3498db !important;
+                    box-shadow: 0 0 0 0.2rem rgba(52, 152, 219, 0.25) !important;
+                    outline: none;
+                }
+
+                .btn:hover {
+                    transform: translateY(-2px);
+                    box-shadow: 0 8px 20px rgba(52, 152, 219, 0.3) !important;
+                }
+
+                .btn:active {
+                    transform: translateY(0);
+                }
+
+                textarea.form-control:focus {
+                    border-color: #3498db !important;
+                    box-shadow: 0 0 0 0.2rem rgba(52, 152, 219, 0.25) !important;
+                }
+            </style>
+        </div>
+    </div>
+</div>
