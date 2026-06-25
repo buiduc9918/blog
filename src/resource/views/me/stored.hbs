@@ -1,13 +1,13 @@
 <div class="mt-4">
     <div class="container">
-        <h3>Khoa hoc cua toi</h3>
+        <h3>Khóa học của tôi</h3>
         <table class="table">
             <thead>
                 <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">Ten khoa hoc</th>
-                    <th scope="col">Trinh do</th>
-                    <th scope="col" colspan="2">Thoi gian tao</th>
+                    <th scope="col">Thứ tự</th>
+                    <th scope="col">Tên khóa học</th>
+                    <th scope="col">Trình độ</th>
+                    <th scope="col" colspan="2">Thời gian tạo</th>
                 </tr>
             </thead>
             <tbody>
@@ -18,8 +18,10 @@
                     <td scope="row">{{this.level}}</td>
                     <td scope="row" colspan="2">{{this.createdAt}}</td>
                     <td>
-                        <a type="button" href="courses/{{this._id}}/edit" class="btn btn-dark">Sua</a>
-                        <a type="button" href="#" class="btn btn-dark">Xoa</a>
+                        <a type="button" href="courses/{{this._id}}/edit" class="btn btn-dark">Sửa</a>
+                        <!-- Button trigger modal -->
+                        <a type="button" href="#" class="btn btn-dark" data-bs-toggle="modal" data-name="duc"
+                            data-id="{{this._id}}" data-bs-target="#deleteBackdrop">Xóa</a>
                     </td>
 
                 </tr>
@@ -30,3 +32,40 @@
     </div>
 
 </div>
+<!-- Modal -->
+<div class="modal fade" id="deleteBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+    aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="staticBackdropLabel">Cảnh báo</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                Bạn có muốn xóa khóa học này không
+            </div>
+
+            <div class="modal-footer">
+                <button id="delete-button" type="button" class="btn btn-danger">Xóa</button>
+                <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Hủy</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<form method="POST" id="del-form">
+</form>
+<script>
+    var id;
+    var deleteForm = document.forms['del-form'];
+    const buttonDelete = document.getElementById('delete-button');
+
+    deleteBackdrop.addEventListener('show.bs.modal', function (event) {
+        var button = event.relatedTarget;
+        id = button.getAttribute('data-id');
+    })
+    buttonDelete.addEventListener('click', function () {
+      deleteForm.action = '/courses/' + id + '/delete?_method=DELETE';
+      deleteForm.submit();
+    });
+</script>

@@ -13,23 +13,23 @@
                 <!-- FORM -->
                 <form class="mt-4" method="POST" action="/courses/{{this._id}}?_method=PUT" style="padding: 20px;">
 
-                    <label for="name">Name</label>
+                    <label for="name">Tên khóa học</label>
                     <input id="name" type="text" name="name" value="{{this.name}}" class="form-control mb-3">
 
-                    <label for="description">Description</label>
+                    <label for="description">Miêu tả</label>
                     <textarea id="description" name="description"
                         class="form-control mb-3">{{this.description}}</textarea>
 
                     <label for="videoID">Video ID</label>
                     <input id="videoID" type="text" name="videoID" value="{{this.videoID}}" class="form-control mb-3">
 
-                    <label for="level">Level</label>
+                    <label for="level">Cấp độ</label>
                     <input id="level" type="text" name="level" value="{{this.level}}" class="form-control mb-4">
                     <!-- Submit Button -->
                     <div class="d-grid gap-2 mt-5">
                         <button type="submit" class="btn btn-lg shadow-sm"
                             style="background: linear-gradient(135deg, #3498db, #2980b9); color: white; border: none; border-radius: 8px; font-weight: 600; letter-spacing: 0.5px; padding: 12px 24px; transition: all 0.3s ease;">
-                            ✨ Fix Khóa Học
+                            ✨ Cập nhật thông tin
                         </button>
                     </div>
                     <!-- Cancel -->

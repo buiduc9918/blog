@@ -129,17 +129,16 @@
                         transform: scale(1.08);
                     }
                 </style>
+                  <h2 style="margin-top: 0; color: #2c3e50; margin-left = auto;margin-bottom: 15px;">{{this.name}}</h2>
+                <p>Cấp độ : {{this.level}}</p>
+                <p>Hãy cùng nhau từng bước trên con đường lập trình nhé pro.</p>
+                <p>Miêu tả: {{this.description}}</p>
                 {{/each}}
                 </a>
             </div>
             {{#each course}}
             <div class="col-lg-9">
-                <h2 style="margin-top: 0; color: #2c3e50; margin-bottom: 15px;">{{this.name}}</h2>
-                <p>Cấp độ : {{this.level}}</p>
-                <p>Bắt đầu ngay khóa học này — nội dung cập nhật và thực hành thực tế.</p>
-                <p>{{this.description}}</p>
-
-                <iframe "margin-top:30px" width="560" height="315" src="https://www.youtube.com/embed/{{this.videoID}}"
+                <iframe "margin-top:15px" width="750" height="450" src="https://www.youtube.com/embed/{{this.videoID}}"
                     title="YouTube video player" frameborder="0"
                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                     referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>

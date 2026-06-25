@@ -28,7 +28,7 @@ class CourseController {
       next(error);
     }
   }
-   // [POST] /courses/store
+  // [POST] /courses/store
   async store(req, res, next) {
     try {
       const course = new Course(req.body);
@@ -55,12 +55,18 @@ class CourseController {
   async update(req, res, next) {
     console.log(req.params.id);
     try {
-       Course.updateOne({_id:req.params.id},req.body)
-      .then(()=>res.redirect('/me'));
-    }catch (error) {
+      Course.updateOne({ _id: req.params.id }, req.body).then(() =>
+        res.redirect("/me"),
+      );
+    } catch (error) {
       next(error);
     }
   }
-  
+  // [DELETE] /courses/:id/delete
+  delete(req, res, next) {
+    Course.findByIdAndDelete({ _id: req.params.id })
+      .then(() => res.redirect("back"))
+      .catch(next);
+  }
 }
 module.exports = new CourseController();
