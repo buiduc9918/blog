@@ -68,5 +68,11 @@ nav.navbar .form-control {
     justify-content: center;
   }
 }
+.user-avartar {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  margin-right: 4px;
+}
 
 /*# sourceMappingURL=app.css.map */

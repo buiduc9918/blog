@@ -1,8 +1,11 @@
 const Course = require("../model/Course");
-const { multipleMongooseToObject } = require("../../util/mongoose");
-const mongoose = require('mongoose');
-slug = require('mongoose-slug-generator');
-mongoose.plugin(slug)
+const {
+  multipleMongooseToObject,
+  mongooseToObject,
+} = require("../../util/mongoose");
+const mongoose = require("mongoose");
+slug = require("mongoose-slug-generator");
+mongoose.plugin(slug);
 
 class CourseController {
   // [Get] /courses/creat
@@ -11,7 +14,7 @@ class CourseController {
     const courses = multipleMongooseToObject(await Course.find(filter));
     res.render("courses/creat", { courses });
   }
-  // [Get] /courses/:slug
+  // [Get] /courses/
   async show(req, res, next) {
     try {
       const query = req.params.slug;
@@ -25,19 +28,39 @@ class CourseController {
       next(error);
     }
   }
-
-  // [POST] /courses/store
+   // [POST] /courses/store
   async store(req, res, next) {
     try {
       const course = new Course(req.body);
-      course.slug = course.name ;
-      course.image = "http://img.youtube.com/vi/" + course.videoID + "/default.jpg";
+      course.slug = course.name;
+      course.image =
+        "http://img.youtube.com/vi/" + course.videoID + "/maxresdefault.jpg";
       await course.save().then(() => res.redirect("/"));
     } catch (error) {
       next(error);
-      console.log(error);
-      res.json(req.body);
     }
   }
+  // [Post] /courses/::id/edit
+  async edit(req, res, next) {
+    try {
+      const query = req.params.id;
+      const filter = { _id: query };
+      const course = multipleMongooseToObject(await Course.find(filter));
+      res.render("courses/edit", { course: course });
+    } catch (error) {
+      next(error);
+    }
+  }
+  // [Put] /courses/:id/?_method=PUT
+  async update(req, res, next) {
+    console.log(req.params.id);
+    try {
+       Course.updateOne({_id:req.params.id},req.body)
+      .then(()=>res.redirect('/me'));
+    }catch (error) {
+      next(error);
+    }
+  }
+  
 }
 module.exports = new CourseController();

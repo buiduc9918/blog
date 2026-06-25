@@ -1,22 +1,25 @@
 <div class="mt-4">
-    <div class="row">
-        {{#each courses}}
-        <div class="col-sm-6 col-md-4">
-            <div class="card card-course-item">
-                <a href="/courses/{{this.slug}}">
-                    <img src="{{this.image}}" class="card-img-top" alt="{{this.name}}">
-                </a>
-                <div class="card-body">
+    <div class="container">
+        <div class="row">
+            {{#each courses}}
+            <div class="col-sm-6 col-md-4">
+                <div class="card card-course-item">
                     <a href="/courses/{{this.slug}}">
-                        <h5 class="card-title">{{this.name}}</h5>
-                        <p class="card-text">{{this.level}}</p>
-
+                        <img src="{{this.image}}" class="card-img-top" alt="{{this.name}}">
                     </a>
-                    <p class="card-text">{{this.description}}</p>
-                    <a href="/courses/{{this.slug}}" class="btn btn-primary">Xem khóa học</a>
+                    <div class="card-body">
+                        <a href="/courses/{{this.slug}}">
+                            <h5 class="card-title">{{this.name}}</h5>
+                            <p class="card-text">{{this.level}}</p>
+
+                        </a>
+                        <p class="card-text">{{this.description}}</p>
+                        <a href="/courses/{{this.slug}}" class="btn btn-primary">Xem khóa học</a>
+                    </div>
                 </div>
             </div>
+            {{/each}}
         </div>
-        {{/each}}
     </div>
+
 </div>

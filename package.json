@@ -5,7 +5,10 @@
   "scripts": {
     "start": "nodemon --inspect src/index.js",
     "watch": "sass -w src/resource/scss/:src/public/css/",
-    "seed": "node src/config/seed.js"
+    "seed": "node src/config/seed.js",
+    "killport" : " netstat -ano | findstr :3000 ",
+    "kill": "npx kill-port 3000"
+
   },
   "dependencies": {
     "cookie-parser": "~1.4.4",
@@ -13,6 +16,7 @@
     "express": "~4.16.1",
     "http-errors": "~1.6.3",
     "jade": "~1.11.0",
+    "method-override": "^3.0.0",
     "mongoose": "^9.7.1",
     "mongoose-slug-generator": "^1.0.4"
   },

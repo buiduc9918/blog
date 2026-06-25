@@ -1,0 +1,45 @@
+<div class="container mt-5 mb-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-8 col-md-10">
+
+            <div class="card shadow-lg border-0" style="border-radius: 12px; overflow: hidden;">
+
+                <!-- Header -->
+                <div
+                    style="background: linear-gradient(135deg, #3498db, #2980b9); padding: 30px; color: white; text-align: center;">
+                    <h2 style="margin: 0;">📚 Sửa khóa học</h2>
+                </div>
+                {{#each course}}
+                <!-- FORM -->
+                <form class="mt-4" method="POST" action="/courses/{{this._id}}?_method=PUT" style="padding: 20px;">
+
+                    <label for="name">Name</label>
+                    <input id="name" type="text" name="name" value="{{this.name}}" class="form-control mb-3">
+
+                    <label for="description">Description</label>
+                    <textarea id="description" name="description"
+                        class="form-control mb-3">{{this.description}}</textarea>
+
+                    <label for="videoID">Video ID</label>
+                    <input id="videoID" type="text" name="videoID" value="{{this.videoID}}" class="form-control mb-3">
+
+                    <label for="level">Level</label>
+                    <input id="level" type="text" name="level" value="{{this.level}}" class="form-control mb-4">
+                    <!-- Submit Button -->
+                    <div class="d-grid gap-2 mt-5">
+                        <button type="submit" class="btn btn-lg shadow-sm"
+                            style="background: linear-gradient(135deg, #3498db, #2980b9); color: white; border: none; border-radius: 8px; font-weight: 600; letter-spacing: 0.5px; padding: 12px 24px; transition: all 0.3s ease;">
+                            ✨ Fix Khóa Học
+                        </button>
+                    </div>
+                    <!-- Cancel -->
+                    <div class="text-center mt-3 mb-3">
+                        <a href="/" style="color: #7f8c8d;">← Quay lại trang chính</a>
+                    </div>
+                </form>
+                {{/each}}
+            </div>
+
+        </div>
+    </div>
+</div>

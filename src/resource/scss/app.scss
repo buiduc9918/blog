@@ -1,4 +1,5 @@
 @use 'variable' as v;
+
 .test {
     font-size: 1rem;
     background-color: v.$red_color;
@@ -42,18 +43,21 @@ nav.navbar .form-control {
     background: linear-gradient(90deg, v.$blue_color, v.$red_color);
     color: #fff;
     border-radius: 10px;
-    box-shadow: 0 6px 18px rgba(0,0,0,0.12);
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12);
     text-decoration: none;
     font-weight: 700;
     transition: transform .15s ease, box-shadow .15s ease, filter .15s ease;
 }
+
 .btn-cta:hover {
     transform: translateY(-3px);
     filter: brightness(.98);
 }
+
 .btn-cta__icon {
     font-size: 1rem;
 }
+
 .course-cta__subtitle {
     margin: 0;
     color: #666;
@@ -61,5 +65,15 @@ nav.navbar .form-control {
 }
 
 @media (max-width: 767px) {
-    .btn-cta { width: 100%; justify-content: center; }
+    .btn-cta {
+        width: 100%;
+        justify-content: center;
+    }
+}
+
+.user-avartar {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    margin-right: 4px;
 }
