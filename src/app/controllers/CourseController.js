@@ -1,4 +1,5 @@
 const Course = require("../model/Course");
+
 const {
   multipleMongooseToObject,
   mongooseToObject,
@@ -62,9 +63,9 @@ class CourseController {
     }
   }
   // [DELETE] /courses/:id/delete
-  delete(req, res, next) {
-    Course.findByIdAndDelete({ _id: req.params.id })
-      .then(() => res.redirect("back"))
+  destroy(req, res, next) {
+    Course.findOneAndDelete( {_id: req.params.id })
+      .then(() =>res.redirect("back"))
       .catch(next);
   }
 }

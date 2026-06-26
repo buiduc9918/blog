@@ -3,9 +3,8 @@ const Schema = mongoose.Schema;
 
 
 const slugify = require("slugify");
-const mongooseDelete = require('mongoose-delete');
 
-//khai bao cau truc bien
+
 const Course = new Schema(
   {
     name: { type: String, maxlength: 200 },

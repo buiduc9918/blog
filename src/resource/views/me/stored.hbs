@@ -1,101 +1,176 @@
 <div class="mt-4">
-    <div class="container">
+    <div>
 
-        <h3 class="mb-3">📚 Khóa học của tôi</h3>
+        <h3 class="mb-4 text-dark fw-bold">📚 Khóa học của tôi</h3>
 
-        <table class="table table-hover align-middle">
-
-            <thead class="table-dark">
-                <tr>
-                    <th>#</th>
-                    <th>Tên khóa học</th>
-                    <th>Trình độ</th>
-                    <th>Ngày tạo</th>
-                    <th>Hành động</th>
-                </tr>
-            </thead>
-
-            <tbody>
-
-                {{#each courses}}
-                <tr>
-
-                    <td>{{sum @index 1}}</td>
-                    <td class="fw-semibold">{{this.name}}</td>
-                    <td>
-                        <span class="badge bg-primary">
-                            {{this.level}}
-                        </span>
-                    </td>
-                    <td>{{this.createdAt}}</td>
-
-                    <td>
-                        <a href="/courses/{{this._id}}/edit"
-                           class="btn btn-sm btn-warning">
-                            Sửa
-                        </a>
-
-                        <button class="btn btn-sm btn-danger"
-                                data-bs-toggle="modal"
-                                data-bs-target="#deleteModal"
-                                data-id="{{this._id}}">
-                            Xóa
-                        </button>
-                    </td>
-
-                </tr>
-                {{/each}}
-
-            </tbody>
-
-        </table>
-
-    </div>
-</div>
-<!-- Modal -->
-<div class="modal fade" id="deleteModal" tabindex="-1">
-    <div class="modal-dialog">
-
-        <div class="modal-content">
-
-            <div class="modal-header">
-                <h5 class="modal-title">⚠️ Xác nhận xóa</h5>
-                <button class="btn-close" data-bs-dismiss="modal"></button>
-            </div>
-
-            <div class="modal-body">
-                Bạn chắc chắn muốn xóa khóa học này?
-            </div>
-
-            <div class="modal-footer">
-                <button id="btnDelete" class="btn btn-danger">
-                    Xóa
-                </button>
-                <button class="btn btn-secondary" data-bs-dismiss="modal">
-                    Hủy
-                </button>
-            </div>
-
+        <div class="table-responsive table-glass-container">
+            <table class="table table-hover align-middle mb-0">
+                <thead>
+                    <tr>
+                        <th scope="col" style="width: 80px;">#</th>
+                        <th scope="col">Tên khóa học</th>
+                        <th scope="col" style="width: 150px;">Trình độ</th>
+                        <th scope="col" style="width: 200px;">Ngày tạo</th>
+                        <th scope="col" style="width: 180px;" class="text-end">Hành động</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {{#each courses}}
+                    <tr>
+                        <td class="text-muted fw-bold">{{sum @index 1}}</td>
+                        <td class="fw-semibold text-dark">{{this.name}}</td>
+                        <td>
+                            <span class="badge badge-custom bg-primary bg-opacity-10">
+                                {{this.level}}
+                            </span>
+                        </td>
+                        <td class="text-secondary">{{this.createdAt}}</td>
+                        <td class="text-end">
+                            <a href="/courses/{{this._id}}/edit" class="btn btn-sm btn-action btn-warning-custom me-2">
+                                Sửa
+                            </a>
+                            <button type="button" 
+                                    class="btn btn-sm btn-action btn-danger-custom"
+                                    data-bs-toggle="modal" 
+                                    data-bs-target="#deleteModal" 
+                                    data-id="{{this._id}}">
+                                Xóa
+                            </button>
+                        </td>
+                    </tr>
+                    {{else}}
+                    <tr>
+                        <td colspan="5" class="text-center py-5 text-muted">
+                            <p class="mb-0">Bạn chưa đăng khóa học nào.</p>
+                            <a href="/courses/creat" class="btn btn-sm btn-success mt-2">Đăng khóa học ngay</a>
+                        </td>
+                    </tr>
+                    {{/each}}
+                </tbody>
+            </table>
         </div>
 
     </div>
 </div>
 
+<div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content modal-glass">
+            <div class="modal-header border-0">
+                <h5 class="modal-title fw-bold text-dark" id="deleteModalLabel">⚠️ Xác nhận xóa</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body text-secondary">
+                Bạn có chắc chắn muốn xóa khóa học này? Hành động này không thể hoàn tác.
+            </div>
+            <div class="modal-footer border-0">
+                <button type="button" class="btn btn-secondary px-3" data-bs-dismiss="modal">Hủy</button>
+                <button id="btnDelete" type="button" class="btn btn-danger px-4 fw-medium">Xóa bỏ</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 <form method="POST" id="delete-form"></form>
+
+<style>
+    /* Bảng hiệu ứng kính trong suốt */
+    .table-glass-container {
+        background: rgba(255, 255, 255, 0.45);
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 255, 255, 0.4);
+        border-radius: 16px;
+        overflow: hidden;
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.04);
+    }
+
+    .table th {
+        background-color: rgba(45, 55, 72, 0.9) !important;
+        color: #ffffff !important;
+        font-weight: 500;
+        padding: 14px 20px;
+        border: none;
+    }
+
+    .table td {
+        padding: 16px 20px;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+    }
+
+    /* Badge tùy biến mềm mại hơn */
+    .badge-custom {
+        padding: 6px 12px;
+        border-radius: 8px;
+        font-weight: 600;
+        font-size: 12px;
+    }
+
+    /* Làm mượt các nút hành động */
+    .btn-action {
+        padding: 6px 16px;
+        border-radius: 8px;
+        font-weight: 500;
+        font-size: 13px;
+        border: none;
+        transition: all 0.2s ease;
+    }
+
+    .btn-warning-custom {
+        background-color: #ffb020;
+        color: #fff;
+    }
+    .btn-warning-custom:hover {
+        background-color: #e09710;
+        color: #fff;
+        transform: translateY(-1px);
+    }
+
+    .btn-danger-custom {
+        background-color: #ff4d4f;
+        color: #fff;
+    }
+    .btn-danger-custom:hover {
+        background-color: #d9363e;
+        color: #fff;
+        transform: translateY(-1px);
+    }
+
+    /* Modal hiệu ứng kính */
+    .modal-glass {
+        background: rgba(255, 255, 255, 0.85);
+        backdrop-filter: blur(15px);
+        -webkit-backdrop-filter: blur(15px);
+        border: 1px solid rgba(255, 255, 255, 0.6);
+        border-radius: 20px;
+        box-shadow: 0 20px 50px rgba(0, 0, 0, 0.1);
+    }
+</style>
+
 <script>
-    let courseId;
-    const deleteForm = document.getElementById('delete-form');
-    const butonDelete = document.getElementById('btnDelete');
+    document.addEventListener('DOMContentLoaded', function () {
+        let courseId;
+        const deleteForm = document.getElementById('delete-form');
+        const btnDelete = document.getElementById('btnDelete');
+        const deleteModal = document.getElementById('deleteModal');
 
-    const deleteModal = document.getElementById('deleteModal');
+        if (deleteModal) {
+            // 🚨 ĐOẠN CODE QUAN TRỌNG: Tự động bốc Modal ra ngoài body để sửa lỗi mờ/đơ màn hình
+            document.body.appendChild(deleteModal);
 
-    deleteModal.addEventListener('show.bs.modal', function (event) {
-        const button = event.relatedTarget;
-        courseId = button.getAttribute('data-id');
-    });
+            // Lắng nghe sự kiện mở modal để lấy ID khóa học
+            deleteModal.addEventListener('show.bs.modal', function (event) {
+                const button = event.relatedTarget;
+                courseId = button.getAttribute('data-id');
+            });
+        }
 
-    butonDelete.addEventListener('click', function () {
-        deleteForm.action = '/courses/' + courseId + '/delete?_method=DELETE';
-        deleteForm.submit();
+        // Xử lý sự kiện click nút xác nhận xóa
+        if (btnDelete && deleteForm) {
+            btnDelete.addEventListener('click', function () {
+                deleteForm.action = '/courses/' + courseId + '/delete?_method=DELETE';
+                deleteForm.submit();
+            });
+        }
     });
 </script>

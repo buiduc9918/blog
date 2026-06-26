@@ -1,76 +1,80 @@
 <!DOCTYPE html>
-<html lang="en">
-
+<html lang="vi">
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tôi làm thợ công nghệ</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css"
-        integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
-    <link rel="stylesheet" href="/css/app.css">
-</head>
-
-<body style="background: linear-gradient(135deg, #e5e6e7 0%, #edeaf0 25%, #e0d9e0 50%, #d7dde2 75%, #e6ecec 100%); background-size: 400% 400%; animation: gradientShift 15s ease infinite; min-height: 100vh;">
-
+    <title>{{title}}</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    
     <style>
-        @keyframes gradientShift {
-            0% {
-                background-position: 0% 50%;
-            }
-            50% {
-                background-position: 100% 50%;
-            }
-            100% {
-                background-position: 0% 50%;
-            }
+        /* Cấu hình chung cho toàn bộ trang */
+        html, body {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            min-height: 100vh;
+            scroll-behavior: smooth;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
         }
 
+        /* Nền chuyển động mượt mà (Gradient Animation) */
         body {
             position: relative;
             overflow-x: hidden;
+            background: linear-gradient(135deg, #e5e6e7 0%, #edeaf0 25%, #e0d9e0 50%, #d7dde2 75%, #e6ecec 100%);
+            background-size: 400% 400%;
+            animation: gradientShift 15s ease infinite;
+            will-change: background-position;
         }
 
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* Lớp phủ ánh sáng (Radial Glow Layer) */
         body::before {
             content: '';
             position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: 
-                radial-gradient(circle at 20% 50%, rgba(255,255,255,0.1) 0%, transparent 50%),
-                radial-gradient(circle at 80% 80%, rgba(255,255,255,0.05) 0%, transparent 50%);
+            inset: 0;
+            background:
+                radial-gradient(circle at 20% 50%, rgba(255, 255, 255, 0.12), transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(255, 255, 255, 0.08), transparent 50%);
             pointer-events: none;
-            z-index: 1;
+            z-index: 0;
         }
 
+        /* Đảm bảo nội dung nổi lên trên lớp nền */
         .app {
             position: relative;
-            z-index: 2;
+            z-index: 1;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
         }
 
-        container {
-            position: relative;
-            z-index: 2;
+        /* Giúp footer luôn nằm dưới cùng ngay cả khi ít nội dung */
+        .container {
+            flex: 1;
+            padding-top: 2rem;
+            padding-bottom: 2rem;
         }
     </style>
+</head>
+<body>
 
     <div class="app">
-        {{>header }}
-        <container class="container">
-            {{{body}}}
-        </container>
-        {{>footer}}
-    </div>
-    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"
-        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
-        crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
-        integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN"
-        crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.min.js"
-        integrity="sha384-+sLIOodYLS7CIrQpBjl+C7nPvqq+FbNUBDunl/OZv93DB7Ln/533i8e/mZXLi/P+"
-        crossorigin="anonymous"></script>
+        {{> header}}
 
+        <main>
+            {{{body}}}
+        </main>
+
+        {{> footer}}
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
 </body>
+</html>

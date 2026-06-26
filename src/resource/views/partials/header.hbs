@@ -1,74 +1,107 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
+<nav class="navbar navbar-expand-lg navbar-glass sticky-top">
   <style>
-    .user-avartar {
+    /* Hiệu ứng mờ kính (Glassmorphism) sang trọng, tiệp vào nền */
+    .navbar-glass {
+      background: rgba(255, 255, 255, 0.65) !important;
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.4);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
+    }
+
+    /* Định dạng Avatar người dùng tròn và sắc nét */
+    .user-avatar {
       width: 32px;
       height: 32px;
       border-radius: 50%;
       object-fit: cover;
-      margin-right: 6px;
+      margin-right: 8px;
+      border: 1.5px solid rgba(0, 0, 0, 0.1);
     }
 
-    /* chỉnh spacing navbar cho gọn hơn */
+    /* Tinh chỉnh khoảng cách thanh điều hướng gọn gàng hơn */
     .navbar-nav .nav-link {
-      padding: 6px 12px;
+      padding: 6px 14px;
+      display: flex;
+      align-items: center;
+      font-weight: 500;
+      color: #4a5568 !important;
     }
 
-    /* search nhỏ gọn hơn */
-    .form-control {
-      height: 34px;
+    .navbar-brand {
+      font-weight: 600;
+      color: #2d3748 !important;
+    }
+
+    /* Bo góc nhẹ nhàng cho ô tìm kiếm và nút bấm */
+    .navbar .form-control {
+      height: 36px;
       font-size: 14px;
+      border-radius: 8px;
+      border: 1px solid rgba(0, 0, 0, 0.15);
+      background-color: rgba(255, 255, 255, 0.8);
     }
 
-    .btn {
-      padding: 4px 10px;
+    .navbar .form-control:focus {
+      background-color: #fff;
+      box-shadow: 0 0 0 3px rgba(25, 135, 84, 0.15);
+    }
+
+    .navbar .btn {
+      padding: 5px 14px;
+      font-size: 14px;
+      border-radius: 8px;
+      font-weight: 500;
+    }
+
+    /* Style lại menu đổ xuống cho đồng bộ */
+    .dropdown-menu {
+      border: 1px solid rgba(0, 0, 0, 0.08);
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+      border-radius: 10px;
+      padding: 6px;
+    }
+
+    .dropdown-item {
+      border-radius: 6px;
+      padding: 8px 16px;
       font-size: 14px;
     }
   </style>
+
   <div class="container">
     <a class="navbar-brand" href="/">Tôi làm thợ công nghệ thông tin tại nhà</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+    
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
       aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
 
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav ml-auto">
-        <li class="nav-item dropdown">
+      <ul class="navbar-nav ms-auto mb-2 mb-lg-0 align-items-lg-center">
+        <li class="nav-item dropdown me-2">
           <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
             aria-expanded="false">
-            <img
-              src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRuDGi1_AVK3XUdN5cS9tUBuYhgg9UhK3zN0hA_3b6M-Q&s=10"
-              alt="" class="user-avartar">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRuDGi1_AVK3XUdN5cS9tUBuYhgg9UhK3zN0hA_3b6M-Q&s=10"
+              alt="Avatar" class="user-avatar">
             Trung Đức
           </a>
-          <img src="" alt="">
-          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+          
+          <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
             <li><a class="dropdown-item" href="/courses/creat">Đăng khóa học</a></li>
-            <li>
-              <hr class="dropdown-divider">
-            </li>
+            <li><hr class="dropdown-divider"></li>
             <li><a class="dropdown-item" href="/me">Khóa học của tôi</a></li>
             <li><a class="dropdown-item" href="/me/news">Bài viết của tôi</a></li>
-
-            <li>
-              <hr class="dropdown-divider">
-            </li>
-            <li><a class="dropdown-item" href="#">Đăng xuất</a></li>
+            <li><hr class="dropdown-divider"></li>
+            <li><a class="dropdown-item text-danger" href="#">Đăng xuất</a></li>
           </ul>
         </li>
       </ul>
-      <form class="form-inline my-2 my-lg-0">
-        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+
+      <form class="d-flex">
+        <input class="form-control me-2" type="search" placeholder="Tìm kiếm..." aria-label="Search">
+        <button class="btn btn-outline-success" type="submit">Search</button>
       </form>
     </div>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"
-      integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p"
-      crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"
-      integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF"
-      crossorigin="anonymous"></script>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
-      integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
   </div>
 </nav>
