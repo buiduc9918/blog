@@ -23,8 +23,19 @@
                     <label for="videoID">Video ID</label>
                     <input id="videoID" type="text" name="videoID" value="{{this.videoID}}" class="form-control mb-3">
 
-                    <label for="level">Cấp độ</label>
-                    <input id="level" type="text" name="level" value="{{this.level}}" class="form-control mb-4">
+                    <!-- LEVEL -->
+                    <label for="level" class="form-label fw-semibold">🧭 Cấp độ</label>
+
+                    <select id="level" name="level" class="form-select form-select-lg" required>
+                        <option value="">-- Chọn cấp độ --</option>
+                        <option value="Beginner">🟢 Beginner</option>
+                        <option value="Intermediate">🟡 Intermediate</option>
+                        <option value="Advanced">🔴 Advanced</option>
+                    </select>
+
+                    <script>
+                        document.getElementById('level').value = "{{this.level}}";
+                    </script>
                     <!-- Submit Button -->
                     <div class="d-grid gap-2 mt-5">
                         <button type="submit" class="btn btn-lg shadow-sm"
