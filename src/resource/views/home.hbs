@@ -1,62 +1,184 @@
 <div class="mt-4">
-
-    <div class="container">
-
+    <div class="container-fluid px-0">
         <div class="row g-4">
 
-            {{#each courses}}
+            <div class="col-lg-8">
 
-            <div class="col-sm-6 col-md-4">
-
-                <div class="card h-100 border-0 shadow-sm course-card">
-
-                    <!-- IMAGE -->
-                    <a href="/courses/{{this.slug}}">
-                        <img src="{{this.image}}"
-                             class="card-img-top course-img"
-                             alt="{{this.name}}">
-                    </a>
-
-                    <!-- BODY -->
-                    <div class="card-body">
-
-                        <a href="/courses/{{this.slug}}"
-                           class="text-decoration-none text-dark">
-
-                            <h5 class="card-title fw-bold mb-1">
-                                {{this.name}}
-                            </h5>
-
-                        </a>
-
-                        <span class="badge bg-primary mb-2">
-                            {{this.level}}
-                        </span>
-
-                        <p class="card-text text-muted small">
-                            {{this.description}}
-                        </p>
-
+                {{#if featuredCourse}}
+                <div class="card card-featured mb-4">
+                    <div class="row g-0">
+                        <div class="col-md-6 featured-img-container">
+                            <img src="https://images.unsplash.com/photo-1517694712202-14dd9538aa97?q=80&w=1000"
+                                class="img-fluid featured-img" alt="Featured">
+                        </div>
+                        <div class="col-md-6 d-flex align-items-center">
+                            <div class="card-body p-4">
+                                <span class="badge bg-success bg-opacity-10 text-success mb-2 px-3 py-2 fw-bold">
+                                    MỚI NHẤT
+                                </span>
+                                <h3 class="card-title fw-bold text-dark mb-3">
+                                    Dịch vụ sửa chữa máy tính và hỗ trợ CNTT tại nhà chất lượng cao
+                                </h3>
+                                <p class="card-text text-secondary line-clamp-3">
+                                    Bạn gặp sự cố về phần mềm, mạng máy tính hay cần tối ưu hệ thống? Hãy để thợ công nghệ thông tin tại nhà xử lý nhanh chóng, chuyên nghiệp...
+                                </p>
+                                <div class="d-flex align-items-center mt-4">
+                                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRuDGi1_AVK3XUdN5cS9tUBuYhgg9UhK3zN0hA_3b6M-Q&s=10"
+                                        class="rounded-circle me-2" width="32" height="32" style="object-fit: cover;">
+                                    <small class="text-dark fw-semibold">Trung Đức</small>
+                                    <small class="text-muted ms-auto">26 Tháng 6, 2026</small>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-
-                    <!-- FOOTER -->
-                    <div class="card-footer bg-white border-0">
-
-                        <a href="/courses/{{this.slug}}"
-                           class="btn btn-outline-primary w-100">
-                            ▶ Xem khóa học
-                        </a>
-
-                    </div>
-
                 </div>
+                {{/if}}
+
+                {{#if courses}}
+                    <h4 class="fw-bold text-dark mb-3 mt-4 d-flex align-items-center">
+                        <span class="pe-2">📚</span> Khóa học mới cập nhật
+                    </h4>
+                    <div class="row g-4">
+                        {{#each courses}}
+                        <div class="col-sm-6">
+                            <div class="card h-100 border-0 shadow-sm course-card">
+                                <div class="position-relative overflow-hidden group-hover-img">
+                                    <a href="/courses/{{this.slug}}">
+                                        <img src="{{this.image}}" class="card-img-top course-img" alt="{{this.name}}">
+                                    </a>
+                                    <span class="position-absolute top-0 start-0 m-3 badge bg-primary bg-opacity-75 text-white px-2 py-1.5 badge-custom">
+                                        {{this.level}}
+                                    </span>
+                                </div>
+                                <div class="card-body d-flex flex-column">
+                                    <a href="/courses/{{this.slug}}" class="text-decoration-none text-dark">
+                                        <h5 class="card-title fw-bold line-clamp-2 mb-2">{{this.name}}</h5>
+                                    </a>
+                                    <p class="card-text text-muted small line-clamp-3 mb-4">{{this.description}}</p>
+                                </div>
+                                <div class="card-footer bg-transparent border-0 pt-0">
+                                    <a href="/courses/{{this.slug}}" class="btn btn-outline-primary w-100 btn-action rounded-pill fw-medium mb-2">
+                                        ▶ Xem khóa học
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        {{/each}}
+                    </div>
+                {{else}}
+                    <h4 class="fw-bold text-dark mb-3 mt-4 d-flex align-items-center">
+                        <span class="pe-2">🔥</span> Tin tức Công nghệ & Mẹo vặt nổi bật
+                    </h4>
+                    
+                    <div class="row g-4">
+                        <div class="col-sm-6">
+                            <div class="card h-100 border-0 shadow-sm course-card">
+                                <div class="position-relative overflow-hidden">
+                                    <img src="https://images.unsplash.com/photo-1544256718-3bcf237f3974?q=80&w=600" class="card-img-top course-img" alt="News 1">
+                                    <span class="position-absolute top-0 start-0 m-3 badge bg-danger text-white px-2 py-1.5 badge-custom">Mẹo vặt</span>
+                                </div>
+                                <div class="card-body">
+                                    <h5 class="fw-bold text-dark line-clamp-2 mb-2">5 Cách tăng tốc máy tính Windows cũ chạy mượt như mới</h5>
+                                    <p class="text-muted small line-clamp-3">Hướng dẫn dọn rác hệ thống, tắt bớt ứng dụng chạy ngầm và tối ưu hóa ổ cứng SSD giúp máy tính của bạn hoạt động nhanh hơn mà không tốn chi phí...</p>
+                                </div>
+                                <div class="card-footer bg-transparent border-0 pt-0">
+                                    <a href="#" class="btn btn-link text-decoration-none text-primary fw-medium px-0">Đọc bài viết →</a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-6">
+                            <div class="card h-100 border-0 shadow-sm course-card">
+                                <div class="position-relative overflow-hidden">
+                                    <img src="https://images.unsplash.com/photo-1563986768609-322da13575f3?q=80&w=600" class="card-img-top course-img" alt="News 2">
+                                    <span class="position-absolute top-0 start-0 m-3 badge bg-warning text-dark px-2 py-1.5 badge-custom">Cảnh báo</span>
+                                </div>
+                                <div class="card-body">
+                                    <h5 class="fw-bold text-dark line-clamp-2 mb-2">Dấu hiệu nhận biết máy tính bị nhiễm mã độc và cách xử lý nhanh</h5>
+                                    <p class="text-muted small line-clamp-3">Khi thấy máy tính xuất hiện nhiều quảng cáo lạ hoặc chạy chậm bất thường, rất có thể máy bạn đã dính virus. Xem ngay cách quét virus miễn phí bằng công cụ Windows Defender.</p>
+                                </div>
+                                <div class="card-footer bg-transparent border-0 pt-0">
+                                    <a href="#" class="btn btn-link text-decoration-none text-primary fw-medium px-0">Đọc bài viết →</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {{/if}}
 
             </div>
 
-            {{/each}}
+            <div class="col-lg-4">
+                <div class="card card-sidebar p-4 mb-4 text-center">
+                    <div class="avatar-container mb-3">
+                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRuDGi1_AVK3XUdN5cS9tUBuYhgg9UhK3zN0hA_3b6M-Q&s=10"
+                            class="rounded-circle profile-avatar" alt="Trung Đức">
+                    </div>
+                    <h5 class="fw-bold text-dark mb-1">Trung Đức</h5>
+                    <p class="text-success small fw-medium mb-3">🔧 Thợ CNTT Tại Nhà</p>
+                    <p class="text-secondary small px-2">
+                        Chuyên cung cấp giải pháp máy tính, mạng nội bộ, sửa lỗi phần mềm và hướng dẫn công nghệ thực chiến cho mọi người.
+                    </p>
+                    <div class="border-top pt-3 mt-2">
+                        <a href="/contact" class="btn btn-success btn-sm w-100 rounded-pill fw-medium py-2">
+                            Đặt lịch hỗ trợ ngay
+                        </a>
+                    </div>
+                </div>
+
+                <div class="card card-sidebar p-4">
+                    <h6 class="fw-bold text-dark mb-3 border-bottom pb-2">📂 Danh mục nổi bật</h6>
+                    <ul class="list-group list-group-flush bg-transparent">
+                        <li class="list-group-item d-flex justify-content-between align-items-center px-0 bg-transparent text-secondary border-0 pb-2">
+                            Sửa chữa Phần cứng <span class="badge bg-secondary bg-opacity-20 text-dark rounded-pill">12</span>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between align-items-center px-0 bg-transparent text-secondary border-0 py-2">
+                            Thủ thuật Phần mềm <span class="badge bg-secondary bg-opacity-20 text-dark rounded-pill">24</span>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between align-items-center px-0 bg-transparent text-secondary border-0 pt-2">
+                            Mạng & Bảo mật <span class="badge bg-secondary bg-opacity-20 text-dark rounded-pill">8</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
 
         </div>
-
     </div>
-
 </div>
+
+<style>
+    .card-featured, .course-card, .card-sidebar {
+        background: rgba(255, 255, 255, 0.55) !important;
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        border: 1px solid rgba(255, 255, 255, 0.5) !important;
+        border-radius: 20px !important;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.03);
+        overflow: hidden;
+        transition: transform 0.25s ease, box-shadow 0.25s ease;
+    }
+
+    .course-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 15px 35px rgba(0, 0, 0, 0.07);
+    }
+
+    .featured-img-container { max-height: 300px; overflow: hidden; }
+    .featured-img, .course-img { width: 100%; height: 100%; object-fit: cover; }
+    .course-img { height: 200px; transition: transform 0.4s ease; }
+    .course-card:hover .course-img { transform: scale(1.04); }
+
+    .profile-avatar {
+        width: 90px; height: 90px; object-fit: cover;
+        border: 3px solid #fff; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+    }
+
+    .badge-custom { font-weight: 500; font-size: 12px; }
+    .btn-action { padding: 8px 16px; font-size: 14px; transition: all 0.2s ease; }
+
+    .line-clamp-2 {
+        display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;
+    }
+    .line-clamp-3 {
+        display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden;
+    }
+</style>
