@@ -4,8 +4,7 @@ const {
   mongooseToObject,
 } = require("../../util/mongoose");
 const mongoose = require("mongoose");
-slug = require("mongoose-slug-generator");
-mongoose.plugin(slug);
+
 
 class CourseController {
   // [Get] /courses/creat
@@ -32,10 +31,10 @@ class CourseController {
   async store(req, res, next) {
     try {
       const course = new Course(req.body);
-      course.slug = course.name;
       course.image =
         "http://img.youtube.com/vi/" + course.videoID + "/maxresdefault.jpg";
-      await course.save().then(() => res.redirect("/"));
+      await course.save();
+      res.redirect("/");
     } catch (error) {
       next(error);
     }
