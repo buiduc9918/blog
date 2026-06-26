@@ -1,4 +1,29 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <style>
+    .user-avartar {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      object-fit: cover;
+      margin-right: 6px;
+    }
+
+    /* chỉnh spacing navbar cho gọn hơn */
+    .navbar-nav .nav-link {
+      padding: 6px 12px;
+    }
+
+    /* search nhỏ gọn hơn */
+    .form-control {
+      height: 34px;
+      font-size: 14px;
+    }
+
+    .btn {
+      padding: 4px 10px;
+      font-size: 14px;
+    }
+  </style>
   <div class="container">
     <a class="navbar-brand" href="/">Tôi làm thợ công nghệ thông tin tại nhà</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
@@ -11,13 +36,15 @@
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
             aria-expanded="false">
-             <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRuDGi1_AVK3XUdN5cS9tUBuYhgg9UhK3zN0hA_3b6M-Q&s=10" alt="" class="user-avartar">
+            <img
+              src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRuDGi1_AVK3XUdN5cS9tUBuYhgg9UhK3zN0hA_3b6M-Q&s=10"
+              alt="" class="user-avartar">
             Trung Đức
           </a>
           <img src="" alt="">
           <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
             <li><a class="dropdown-item" href="/courses/creat">Đăng khóa học</a></li>
-           <li>
+            <li>
               <hr class="dropdown-divider">
             </li>
             <li><a class="dropdown-item" href="/me">Khóa học của tôi</a></li>

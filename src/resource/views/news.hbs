@@ -1,1 +1,126 @@
-<h1>Thông tin</h1>      
+<h2 class="mb-4 fw-bold">📰 Tin tức hôm nay</h2>
+
+<!-- TIN NỔI BẬT -->
+<div class="card mb-4 shadow-sm">
+    <img src="https://picsum.photos/1000/400" class="card-img-top">
+
+    <div class="card-body">
+        <span class="badge bg-danger">TIN NỔI BẬT</span>
+
+        <h3 class="mt-2">
+            Công nghệ AI đang thay đổi cách con người học tập và làm việc
+        </h3>
+
+        <p class="text-muted">
+            Trí tuệ nhân tạo (AI) đang được ứng dụng mạnh mẽ trong giáo dục,
+            y tế và doanh nghiệp, giúp tăng năng suất và hiệu quả công việc.
+        </p>
+
+        <small class="text-secondary">
+            🕒 26/06/2026 • 👁 15.200 • 💬 320
+        </small>
+    </div>
+</div>
+
+<div class="row">
+
+    <!-- DANH SÁCH TIN CHÍNH -->
+    <div class="col-lg-8">
+
+        <h5 class="mb-3">Tin mới</h5>
+
+        <div class="list-group">
+
+            <a href="#" class="list-group-item list-group-item-action">
+                ⚡ Giá vàng tăng mạnh trở lại trong phiên sáng
+            </a>
+
+            <a href="#" class="list-group-item list-group-item-action">
+                ⚽ World Cup 2026: Các đội lớn giành vé sớm
+            </a>
+
+            <a href="#" class="list-group-item list-group-item-action">
+                💻 AI bùng nổ trong ngành lập trình phần mềm
+            </a>
+
+            <a href="#" class="list-group-item list-group-item-action">
+                📈 Chứng khoán Việt Nam tăng điểm tích cực
+            </a>
+
+            <a href="#" class="list-group-item list-group-item-action">
+                🌦 Hà Nội mưa dông vào chiều tối
+            </a>
+
+            <a href="#" class="list-group-item list-group-item-action">
+                🚗 Xe điện trở thành xu hướng toàn cầu
+            </a>
+
+            <a href="#" class="list-group-item list-group-item-action">
+                🎓 Nhiều trường đại học công bố tuyển sinh mới
+            </a>
+
+        </div>
+
+        <!-- GRID BÀI VIẾT -->
+        <div class="row mt-4">
+
+            {{#each courses}}
+
+            <div class="col-md-6 mb-4">
+
+                <div class="card h-100 shadow-sm">
+
+                    <img src="{{this.image}}" class="card-img-top">
+
+                    <div class="card-body">
+
+                        <div class="text-danger fw-bold">
+                            {{this.level}}
+                        </div>
+
+                        <h5 class="mt-2">
+                            {{this.name}}
+                        </h5>
+
+                        <p class="text-muted">
+                            {{this.description}}
+                        </p>
+
+                    </div>
+
+                    <div class="card-footer text-muted small">
+                        🕒 {{this.createdAt}}
+                    </div>
+
+                </div>
+
+            </div>
+
+            {{/each}}
+
+        </div>
+
+    </div>
+
+    <!-- SIDEBAR -->
+    <div class="col-lg-4">
+
+        <div class="p-3 bg-light rounded shadow-sm">
+
+            <h5 class="mb-3">🔥 Tin đọc nhiều</h5>
+
+            <ul class="list-group list-group-flush">
+
+                <li class="list-group-item">Giá vàng biến động mạnh</li>
+                <li class="list-group-item">AI thay đổi ngành IT</li>
+                <li class="list-group-item">World Cup 2026 nóng lên</li>
+                <li class="list-group-item">Công nghệ xe điện phát triển</li>
+                <li class="list-group-item">Thời tiết thất thường</li>
+
+            </ul>
+
+        </div>
+
+    </div>
+
+</div>
