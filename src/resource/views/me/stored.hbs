@@ -68,7 +68,7 @@
             </div>
 
             <div class="modal-footer">
-                <button id="btn-delete" class="btn btn-danger">
+                <button id="btnDelete" class="btn btn-danger">
                     Xóa
                 </button>
                 <button class="btn btn-secondary" data-bs-dismiss="modal">
@@ -85,7 +85,7 @@
 <script>
     let courseId;
     const deleteForm = document.getElementById('delete-form');
-    const btnDelete = document.getElementById('btn-delete');
+    const butonDelete = document.getElementById('btnDelete');
 
     const deleteModal = document.getElementById('deleteModal');
 
@@ -94,7 +94,7 @@
         courseId = button.getAttribute('data-id');
     });
 
-    btnDelete.addEventListener('click', function () {
+    butonDelete.addEventListener('click', function () {
         deleteForm.action = '/courses/' + courseId + '/delete?_method=DELETE';
         deleteForm.submit();
     });
