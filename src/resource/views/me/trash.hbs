@@ -1,8 +1,8 @@
 <div class="mt-4">
     <div>
         <div>
-        <h3 class="mb-4 text-dark fw-bold">📚 Khóa học của tôi</h3>
-        <a class="btn btn-sm btn-success mt-2"  href="me/trash/courses">Thùng rác</a>
+            <h3 class="mb-4 text-dark fw-bold">📚 Khóa học đã khóa</h3>
+            <a class="btn btn-sm btn-success mt-2" href="/me">Danh sách khóa học</a>
 
         </div>
 
@@ -30,23 +30,21 @@
                         </td>
                         <td class="text-secondary">{{this.createdAt}}</td>
                         <td class="text-end">
-                            <a href="/courses/{{this._id}}/edit" class="btn btn-sm btn-action btn-warning-custom me-2">
-                                Sửa
+                            <a href="" id="button-restore" data-id="{{this._id}}"
+                                class="btn btn-sm btn-restore btn-action btn-warning-custom me-2">
+                                Khôi phục
                             </a>
-                            <button type="button" 
-                                    class="btn btn-sm btn-action btn-danger-custom"
-                                    data-bs-toggle="modal" 
-                                    data-bs-target="#deleteModal" 
-                                    data-id="{{this._id}}">
-                                Xóa
+                            <button type="button" class="btn btn-sm btn-action btn-danger-custom" data-bs-toggle="modal"
+                                data-bs-target="#deleteModal" data-id="{{this._id}}">
+                                Xóa Vĩnh Viễn
                             </button>
                         </td>
                     </tr>
                     {{else}}
                     <tr>
                         <td colspan="5" class="text-center py-5 text-muted">
-                            <p class="mb-0">Bạn chưa đăng khóa học nào.</p>
-                            <a href="/courses/creat" class="btn btn-sm btn-success mt-2">Đăng khóa học ngay</a>
+                            <p class="mb-0">Thùng giác trống</p>
+                            <a href="/courses/creat" class="btn btn-sm btn-success mt-2">danh sach khoa hoc</a>
                         </td>
                     </tr>
                     {{/each}}
@@ -69,13 +67,15 @@
             </div>
             <div class="modal-footer border-0">
                 <button type="button" class="btn btn-secondary px-3" data-bs-dismiss="modal">Hủy</button>
-                <button id="btnDelete" type="button" class="btn btn-danger px-4 fw-medium">Xóa bỏ</button>
+                <button id="btnDelete" type="button" class="btn btn-danger px-4 fw-medium">Xóa vĩnh viễn</button>
             </div>
         </div>
     </div>
 </div>
 
 <form method="POST" id="delete-form"></form>
+<form method="POST" id="restore-form"></form>
+
 
 <style>
     /* Bảng hiệu ứng kính trong suốt */
@@ -124,6 +124,7 @@
         background-color: #ffb020;
         color: #fff;
     }
+
     .btn-warning-custom:hover {
         background-color: #e09710;
         color: #fff;
@@ -134,6 +135,7 @@
         background-color: #ff4d4f;
         color: #fff;
     }
+
     .btn-danger-custom:hover {
         background-color: #d9363e;
         color: #fff;
@@ -155,8 +157,11 @@
     document.addEventListener('DOMContentLoaded', function () {
         let courseId;
         const deleteForm = document.getElementById('delete-form');
+        const restoreForm = document.getElementById('restore-form');
+
         const btnDelete = document.getElementById('btnDelete');
         const deleteModal = document.getElementById('deleteModal');
+        const btnRestore = document.getElementById('button-restore');
 
         if (deleteModal) {
             // 🚨 ĐOẠN CODE QUAN TRỌNG: Tự động bốc Modal ra ngoài body để sửa lỗi mờ/đơ màn hình
@@ -172,9 +177,25 @@
         // Xử lý sự kiện click nút xác nhận xóa
         if (btnDelete && deleteForm) {
             btnDelete.addEventListener('click', function () {
-                deleteForm.action = '/courses/' + courseId + '/delete?_method=DELETE';
+                deleteForm.action = '/courses/' + courseId + '/force?_method=DELETE';
                 deleteForm.submit();
             });
         }
+
+        document.addEventListener('click', function (e) {
+            // Kiểm tra nếu click trúng nút có class là 'btn-restore' (hoặc class bạn tự đặt)
+            if (e.target && e.target.classList.contains('btn-restore')) {
+                // Lấy id từ thuộc tính data-id của chính nút khôi phục đó
+                e.preventDefault();
+                const restoreId = e.target.getAttribute('data-id');
+                console.log(restoreId);
+
+                if (restoreForm && restoreId) {
+                    // Thay đổi action của form khôi phục và submit
+                    restoreForm.action = '/courses/' + restoreId + '/restore?_method=PATCH';
+                    restoreForm.submit();
+                }
+            }
+        });
     });
 </script>

@@ -6,7 +6,6 @@ const {
 } = require("../../util/mongoose");
 const mongoose = require("mongoose");
 
-
 class CourseController {
   // [Get] /courses/creat
   async creat(req, res, next) {
@@ -14,17 +13,23 @@ class CourseController {
     const courses = multipleMongooseToObject(await Course.find(filter));
     res.render("courses/creat", { courses });
   }
-  // [Get] /courses/
+  // [GET] /courses/:slug hoặc /courses
   async show(req, res, next) {
     try {
-      const query = req.params.slug;
-      const filter = { slug: query };
-      const course = multipleMongooseToObject(await Course.find(filter));
+      const { slug } = req.params;
+      // 1. Tạo filter động: Nếu có slug thì lọc theo slug, không thì lấy tất cả
+      const filter = slug ? { slug } : {};
+      // 2. Lấy dữ liệu từ database
+      const coursesData = await Course.find(filter);
+      const course = multipleMongooseToObject(coursesData);
+      // 3. Kiểm tra dữ liệu (Sử dụng return để chặn lỗi bùng nổ response)
       if (!course || course.length === 0) {
-        res.render("courses/show", { course: course });
+        return res.render("courses/show", { course: [] });
       }
-      res.render("courses/show", { course: course });
+      // 4. Render thành công
+      return res.render("courses/show", { course });
     } catch (error) {
+      // 5. Khối catch duy nhất quản lý toàn bộ lỗi hệ thống
       next(error);
     }
   }
@@ -35,7 +40,7 @@ class CourseController {
       course.image =
         "http://img.youtube.com/vi/" + course.videoID + "/maxresdefault.jpg";
       await course.save();
-      res.redirect("/");
+      res.redirect("/me/");
     } catch (error) {
       next(error);
     }
@@ -64,8 +69,20 @@ class CourseController {
   }
   // [DELETE] /courses/:id/delete
   destroy(req, res, next) {
-    Course.findOneAndDelete( {_id: req.params.id })
-      .then(() =>res.redirect("back"))
+    Course.delete({ _id: req.params.id })
+      .then(() => res.redirect("back"))
+      .catch(next);
+  }
+   // [Patch] /courses/:id/restore?_method=Patch
+  restore(req, res, next) {
+     Course.restore({ _id: req.params.id , deleted:true })
+      .then(() => res.redirect("back"))
+      .catch(next);
+  }
+  // [DELETE] /courses/:id/force
+  force(req, res, next) {
+    Course.deleteOne({ _id: req.params.id })
+      .then(() => res.redirect("back"))
       .catch(next);
   }
 }
