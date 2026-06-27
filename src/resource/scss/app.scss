@@ -77,3 +77,31 @@ nav.navbar .form-control {
     border-radius: 50%;
     margin-right: 4px;
 }
+
+.checkbox-select-all-options {
+    background-color: #f8f9fa; /* Màu nền xám nhạt */
+    border-color: #ced4da;     /* Màu viền */
+    color: #212529;            /* Màu chữ */
+    font-weight: 500;          /* Chữ đậm vừa phải */
+}
+
+/* Thay đổi hiệu ứng khi người dùng click vào (Focus) */
+.checkbox-select-all-options:focus {
+    border-color: #ffb020;     /* Viền chuyển sang màu cam khi click */
+    box-shadow: 0 0 0 0.25rem rgba(255, 176, 32, 0.25); /* Hiệu ứng đổ bóng mờ xung quanh */
+}
+.checkbox-select-all-options option {
+    padding: 8px 12px; /* Tạo khoảng trống trên/dưới và trái/phải */
+    font-size: 0.9rem;
+}
+
+/* Ẩn hoặc làm mờ tùy chọn mặc định đầu tiên đi */
+.checkbox-select-all-options option:first-child {
+    color: #6c757d;
+    font-style: italic;
+}
+.checkbox-select-all-options {
+    padding-right: 2.5rem; /* Tạo khoảng trống bên phải để không bị đè lên mũi tên */
+    background-position: right 0.75rem center; /* Căn chỉnh lại vị trí mũi tên */
+    background-size: 16px 12px; /* Chỉnh kích thước mũi tên nhỏ lại */
+}

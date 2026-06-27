@@ -5,54 +5,85 @@
             <a class="btn btn-sm btn-success mt-2" href="/me">Danh sách khóa học</a>
 
         </div>
+        <div class="mt-4 mb-3 mr-auto" style="max-width: 600px;">
+            <div class="input-group input-group d-flex align-items-start ">
+                <div class="input-group-text">
+                    <input class="form-check-input mt-0" type="radio" name="action-group" id="deleteAllRadio" value="">
+                    <label class="form-check-label ms-2" for="deleteAllRadio">Xoá tất cả</label>
+                </div>
 
+                <select class="form-select checkbox-select-all-options" aria-label="Select menu example">
+                    <option selected disabled>-- Chọn hành động --</option>
+                    <option value="DELETE">Xóa</option>
 
-        <div class="table-responsive table-glass-container">
-            <table class="table table-hover align-middle mb-0">
-                <thead>
-                    <tr>
-                        <th scope="col" style="width: 80px;">#</th>
-                        <th scope="col">Tên khóa học</th>
-                        <th scope="col" style="width: 150px;">Trình độ</th>
-                        <th scope="col" style="width: 200px;">Ngày xóa</th>
-                        <th scope="col" style="width: 180px;" class="text-end">Hành động</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {{#each courses}}
-                    <tr>
-                        <td class="text-muted fw-bold">{{sum @index 1}}</td>
-                        <td class="fw-semibold text-dark">{{this.name}}</td>
-                        <td>
-                            <span class="badge badge-custom bg-primary bg-opacity-10">
-                                {{this.level}}
-                            </span>
-                        </td>
-                        <td class="text-secondary">{{this.deletedAt}}</td>
-                        <td class="text-end">
-                            <a href="" id="button-restore" data-id="{{this._id}}"
-                                class="btn btn-sm btn-restore btn-action btn-warning-custom me-2">
-                                Khôi phục
-                            </a>
-                            <button type="button" class="btn btn-sm btn-action btn-danger-custom" data-bs-toggle="modal"
-                                data-bs-target="#deleteModal" data-id="{{this._id}}">
-                                Xóa Vĩnh Viễn
-                            </button>
-                        </td>
-                    </tr>
-                    {{else}}
-                    <tr>
-                        <td colspan="5" class="text-center py-5 text-muted">
-                            <p class="mb-0">Thùng giác trống</p>
-                            <a href="/courses/creat" class="btn btn-sm btn-success mt-2">danh sach khoa hoc</a>
-                        </td>
-                    </tr>
-                    {{/each}}
-                </tbody>
-            </table>
+                </select>
+
+                <button class="btn btn-primary disable" type="button">Thực thi</button>
+
+            </div>
         </div>
-
     </div>
+</div>
+
+<div class="input-group mb-3">
+
+
+
+
+    <div class="table-responsive table-glass-container">
+        <table class="table table-hover align-middle mb-0">
+            <thead>
+                <tr>
+                    <th scope="col" style="width: 80px;">#</th>
+                    <th scope="col">Tên khóa học</th>
+                    <th scope="col" style="width: 150px;">Trình độ</th>
+                    <th scope="col" style="width: 200px;">Ngày xóa</th>
+                    <th scope="col" style="width: 180px;" class="text-end">Hành động</th>
+                </tr>
+            </thead>
+            <tbody>
+                {{#each courses}}
+                <tr>
+                    <td>
+                        <div class="input-group-text">
+                            <input class="form-check-input mt-0" type="radio" name="coursesIds[]" id="deleteAllRadio"
+                                value="{{this._id}}">
+                        </div>
+
+                    </td>
+
+                    <td class="text-muted fw-bold">{{sum @index 1}}</td>
+                    <td class="fw-semibold text-dark">{{this.name}}</td>
+                    <td>
+                        <span class="badge badge-custom bg-primary bg-opacity-10">
+                            {{this.level}}
+                        </span>
+                    </td>
+                    <td class="text-secondary">{{this.deletedAt}}</td>
+                    <td class="text-end">
+                        <a href="" id="button-restore" data-id="{{this._id}}"
+                            class="btn btn-sm btn-restore btn-action btn-warning-custom me-2">
+                            Khôi phục
+                        </a>
+                        <button type="button" class="btn btn-sm btn-action btn-danger-custom" data-bs-toggle="modal"
+                            data-bs-target="#deleteModal" data-id="{{this._id}}">
+                            Xóa Vĩnh Viễn
+                        </button>
+                    </td>
+                </tr>
+                {{else}}
+                <tr>
+                    <td colspan="5" class="text-center py-5 text-muted">
+                        <p class="mb-0">Thùng giác trống</p>
+                        <a href="/courses/creat" class="btn btn-sm btn-success mt-2">danh sach khoa hoc</a>
+                    </td>
+                </tr>
+                {{/each}}
+            </tbody>
+        </table>
+    </div>
+
+</div>
 </div>
 
 <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
