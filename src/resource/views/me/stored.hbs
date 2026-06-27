@@ -1,8 +1,17 @@
 <div class="mt-4">
+
+    <head>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    </head>
     <div>
         <div>
-        <h3 class="mb-4 text-dark fw-bold">📚 Khóa học của tôi</h3>
-        <a class="btn btn-sm btn-success mt-2"  href="me/trash/courses">Thùng rác</a>
+            <h3 class="mb-4 text-dark fw-bold">📚 Khóa học của tôi</h3>
+            <a class="btn btn-warning-custom-2 i btn-sm btn-warning-custom-2 textblack btn_action mt-2 ml-auto d-inline-flex align-items-center"
+                href="me/trash/courses">
+                <i class="fa-solid fa-trash fas fa-trash-alt mr-2"></i> Thùng rác [{{deletedCount}}] <i
+                    class="fa-solid"></i>
+            </a>
+
 
         </div>
 
@@ -33,11 +42,8 @@
                             <a href="/courses/{{this._id}}/edit" class="btn btn-sm btn-action btn-warning-custom me-2">
                                 Sửa
                             </a>
-                            <button type="button" 
-                                    class="btn btn-sm btn-action btn-danger-custom"
-                                    data-bs-toggle="modal" 
-                                    data-bs-target="#deleteModal" 
-                                    data-id="{{this._id}}">
+                            <button type="button" class="btn btn-sm btn-action btn-danger-custom" data-bs-toggle="modal"
+                                data-bs-target="#deleteModal" data-id="{{this._id}}">
                                 Xóa
                             </button>
                         </td>
@@ -124,6 +130,23 @@
         background-color: #ffb020;
         color: #fff;
     }
+
+    .btn-warning-custom-2 {
+        background-color: #ffb020;
+        color: #fff;
+        /* Thêm viền: độ dày 2px, kiểu nét liền (solid), màu sắc */
+        border: 2px solid #e09612;
+
+        /* Mẹo: Thêm bo góc nếu muốn nút trông mềm mại hơn */
+        border-radius: 4px;
+        margin-right: 8px;
+        font-size: 1.1rem;
+        /* Phóng to icon */
+        vertical-align: middle;
+        /* Căn giữa icon với chữ */
+    }
+
+
     .btn-warning-custom:hover {
         background-color: #e09710;
         color: #fff;
@@ -134,6 +157,7 @@
         background-color: #ff4d4f;
         color: #fff;
     }
+
     .btn-danger-custom:hover {
         background-color: #d9363e;
         color: #fff;

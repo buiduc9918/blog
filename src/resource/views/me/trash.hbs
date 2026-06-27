@@ -14,7 +14,7 @@
                         <th scope="col" style="width: 80px;">#</th>
                         <th scope="col">Tên khóa học</th>
                         <th scope="col" style="width: 150px;">Trình độ</th>
-                        <th scope="col" style="width: 200px;">Ngày tạo</th>
+                        <th scope="col" style="width: 200px;">Ngày xóa</th>
                         <th scope="col" style="width: 180px;" class="text-end">Hành động</th>
                     </tr>
                 </thead>
@@ -28,7 +28,7 @@
                                 {{this.level}}
                             </span>
                         </td>
-                        <td class="text-secondary">{{this.createdAt}}</td>
+                        <td class="text-secondary">{{this.deletedAt}}</td>
                         <td class="text-end">
                             <a href="" id="button-restore" data-id="{{this._id}}"
                                 class="btn btn-sm btn-restore btn-action btn-warning-custom me-2">

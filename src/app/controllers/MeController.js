@@ -7,15 +7,15 @@ class MeController {
   index(req, res, next) {
     res.render("news");
   }
-  // [GET] /me/store
+  // [GET] /me
   stored(req, res, next) {
-    Course.find({ deleted: false })
-      .then((courses) => {
-        res.render("me/stored", {
+    Promise.all([Course.find({ deleted: false }),Course.countDocumentsDeleted()])
+    .then(([courses,deletedCount])=>{
+       res.render("me/stored", {
+          deletedCount,
           courses: multipleMongooseToObject(courses),
-        });
-      })
-      .catch(next);
+        })
+    }).catch(next);
   }
   // [GET] /me/trash/courses
   async trash(req, res, next) {
