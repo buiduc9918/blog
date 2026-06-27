@@ -3,19 +3,15 @@ const { multipleMongooseToObject } = require("../../util/mongoose");
 
 class SiteController {
   // [GET] /
-  async index(req, res, next) {
-    try {
-      const filter = {};
-      const courses = multipleMongooseToObject(await Course.find(filter));
-      console.log("Course filter:", filter, "resultCount:", courses.length);
-      res.render("home", { courses: courses });
-    } catch (error) {
-      next(error);
-    }
+  index(req, res, next) {
+      Course.find({}).then((courses)=>{
+        res.render("home",{
+          courses : multipleMongooseToObject(courses)
+        })
+      }).catch(next);
   }
   // [GET] /search
   search(req, res, next) {
-    console.log(req.query.q);
     res.render("search", { title: "Search Results" });
   }
 
@@ -29,7 +25,6 @@ class SiteController {
         image,
       });
       await newCourse.save();
-      console.log("Course created:", newCourse);
       res.json({
         success: true,
         message: "Tạo khóa học thành công",

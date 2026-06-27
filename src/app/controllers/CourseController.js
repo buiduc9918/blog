@@ -14,24 +14,16 @@ class CourseController {
     res.render("courses/creat", { courses });
   }
   // [GET] /courses/:slug hoặc /courses
-  async show(req, res, next) {
-    try {
-      const { slug } = req.params;
-      // 1. Tạo filter động: Nếu có slug thì lọc theo slug, không thì lấy tất cả
-      const filter = slug ? { slug } : {};
-      // 2. Lấy dữ liệu từ database
-      const coursesData = await Course.find(filter);
-      const course = multipleMongooseToObject(coursesData);
-      // 3. Kiểm tra dữ liệu (Sử dụng return để chặn lỗi bùng nổ response)
-      if (!course || course.length === 0) {
-        return res.render("courses/show", { course: [] });
-      }
-      // 4. Render thành công
-      return res.render("courses/show", { course });
-    } catch (error) {
-      // 5. Khối catch duy nhất quản lý toàn bộ lỗi hệ thống
-      next(error);
-    }
+  show(req, res, next) {
+    const { slug } = req.params;
+    const filter = slug ? { slug } : {};
+    Course.find(filter)
+      .then((courses) => {
+        res.render("courses/show", {
+          course: multipleMongooseToObject(courses),
+        });
+      })
+      .catch(next);
   }
   // [POST] /courses/store
   async store(req, res, next) {
@@ -46,19 +38,19 @@ class CourseController {
     }
   }
   // [Post] /courses/::id/edit
-  async edit(req, res, next) {
-    try {
-      const query = req.params.id;
-      const filter = { _id: query };
-      const course = multipleMongooseToObject(await Course.find(filter));
-      res.render("courses/edit", { course: course });
-    } catch (error) {
-      next(error);
-    }
+  edit(req, res, next) {
+    const query = req.params.id;
+    const filter = { _id: query };
+    Course.find(filter)
+      .then((courses) => {
+        res.render("courses/edit", {
+          course: multipleMongooseToObject(courses),
+        });
+      })
+      .catch(next);
   }
   // [Put] /courses/:id/?_method=PUT
   async update(req, res, next) {
-    console.log(req.params.id);
     try {
       Course.updateOne({ _id: req.params.id }, req.body).then(() =>
         res.redirect("/me"),
@@ -73,9 +65,9 @@ class CourseController {
       .then(() => res.redirect("back"))
       .catch(next);
   }
-   // [Patch] /courses/:id/restore?_method=Patch
+  // [Patch] /courses/:id/restore?_method=Patch
   restore(req, res, next) {
-     Course.restore({ _id: req.params.id , deleted:true })
+    Course.restore({ _id: req.params.id, deleted: true })
       .then(() => res.redirect("back"))
       .catch(next);
   }
