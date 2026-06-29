@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "node --inspect --watch src/index.js",
+    "start": "nodemon --inspect --watch src/index.js",
     "test":"node src/index.js",
     "watch": "sass -w src/resource/scss/:src/public/css/",
     "seed": "node src/config/seed.js",
