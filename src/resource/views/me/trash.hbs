@@ -1,90 +1,81 @@
-<div class="mt-4">
+<form id="container-form" method="POST" class="mt-4" action="/courses/handle-form-action" >
+    <head>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    </head>
     <div>
         <div>
             <h3 class="mb-4 text-dark fw-bold">📚 Khóa học đã khóa</h3>
             <a class="btn btn-sm btn-success mt-2" href="/me">Danh sách khóa học</a>
-
         </div>
         <div class="mt-4 mb-3 mr-auto" style="max-width: 600px;">
             <div class="input-group input-group d-flex align-items-start ">
                 <div class="input-group-text">
-                    <input class="form-check-input mt-0" type="radio" name="action-group" id="deleteAllRadio" value="">
-                    <label class="form-check-label ms-2" for="deleteAllRadio">Xoá tất cả</label>
+                    <input class="form-check-input mt-0" type="checkbox" name="action-group" id="check-box-all" value="">
+                    <label class="form-check-label ms-2" for="check-box-all">Chọn tất cả</label>
                 </div>
-
-                <select class="form-select checkbox-select-all-options" aria-label="Select menu example">
+                <select class="form-select checkbox-select-all-options" aria-label="Select menu example" name="action" required>
                     <option selected disabled>-- Chọn hành động --</option>
-                    <option value="DELETE">Xóa</option>
-
+                    <option value="RESTORE">Khôi phục</option>
                 </select>
-
-                <button class="btn btn-primary disable" type="button">Thực thi</button>
+                <button class="btn btn-primary check-all-submit-btn " type="button">Thực thi</button>
+                <div class="submit-error-msg" style="color: #dc3545; font-size: 14px; display: none; font-weight: 500;"></div>
 
             </div>
         </div>
     </div>
-</div>
-
-<div class="input-group mb-3">
-
-
-
-
-    <div class="table-responsive table-glass-container">
-        <table class="table table-hover align-middle mb-0">
-            <thead>
-                <tr>
-                    <th scope="col" style="width: 80px;">#</th>
-                    <th scope="col">Tên khóa học</th>
-                    <th scope="col" style="width: 150px;">Trình độ</th>
-                    <th scope="col" style="width: 200px;">Ngày xóa</th>
-                    <th scope="col" style="width: 180px;" class="text-end">Hành động</th>
-                </tr>
-            </thead>
-            <tbody>
-                {{#each courses}}
-                <tr>
-                    <td>
-                        <div class="input-group-text">
-                            <input class="form-check-input mt-0" type="radio" name="coursesIds[]" id="deleteAllRadio"
-                                value="{{this._id}}">
-                        </div>
-
-                    </td>
-
-                    <td class="text-muted fw-bold">{{sum @index 1}}</td>
-                    <td class="fw-semibold text-dark">{{this.name}}</td>
-                    <td>
-                        <span class="badge badge-custom bg-primary bg-opacity-10">
-                            {{this.level}}
-                        </span>
-                    </td>
-                    <td class="text-secondary">{{this.deletedAt}}</td>
-                    <td class="text-end">
-                        <a href="" id="button-restore" data-id="{{this._id}}"
-                            class="btn btn-sm btn-restore btn-action btn-warning-custom me-2">
-                            Khôi phục
-                        </a>
-                        <button type="button" class="btn btn-sm btn-action btn-danger-custom" data-bs-toggle="modal"
-                            data-bs-target="#deleteModal" data-id="{{this._id}}">
-                            Xóa Vĩnh Viễn
-                        </button>
-                    </td>
-                </tr>
-                {{else}}
-                <tr>
-                    <td colspan="5" class="text-center py-5 text-muted">
-                        <p class="mb-0">Thùng giác trống</p>
-                        <a href="/courses/creat" class="btn btn-sm btn-success mt-2">danh sach khoa hoc</a>
-                    </td>
-                </tr>
-                {{/each}}
-            </tbody>
-        </table>
+    <div class="input-group mb-3">
+        <div class="table-responsive table-glass-container">
+            <table class="table table-hover align-middle mb-0">
+                <thead>
+                    <tr>
+                        <th scope="col" style="width: 80px;" colspan="2">#</th>
+                        <th scope="col">Tên khóa học</th>
+                        <th scope="col" style="width: 150px;">Trình độ</th>
+                        <th scope="col" style="width: 200px;">Ngày xóa</th>
+                        <th scope="col" style="width: 180px;" class="text-end">Hành động</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {{#each courses}}
+                    <tr>
+                        <td>
+                            <div class="input-group-text">
+                                <input class="form-check-input mt-0" type="checkbox" name="coursesIds[]"
+                                    value="{{this._id}}">
+                            </div>
+                        </td>
+                        <td class="text-muted fw-bold">{{sum @index 1}}</td>
+                        <td class="fw-semibold text-dark">{{this.name}}</td>
+                        <td>
+                            <span class="badge badge-custom bg-primary bg-opacity-10">
+                                {{this.level}}
+                            </span>
+                        </td>
+                        <td class="text-secondary">{{this.deletedAt}}</td>
+                        <td class="text-end">
+                            <a href="" id="button-restore" data-id="{{this._id}}" data-name="{{this.name}}"
+                                class="btn btn-sm btn-restore btn-restore-single btn-action btn-warning-custom me-2">
+                                Khôi phục
+                            </a>
+                            <button type="button" class="btn btn-sm btn-action btn-danger-custom" data-bs-toggle="modal"
+                                data-bs-target="#deleteModal" data-id="{{this._id}}">
+                                Xóa Vĩnh Viễn
+                            </button>
+                        </td>
+                    </tr>
+                    {{else}}
+                    <tr>
+                        <td colspan="5" class="text-center py-5 text-muted">
+                            <p class="mb-0">Thùng giác trống</p>
+                            <a href="/courses/creat" class="btn btn-sm btn-success mt-2">danh sach khoa hoc</a>
+                        </td>
+                    </tr>
+                    {{/each}}
+                </tbody>
+            </table>
+        </div>
     </div>
-
-</div>
-</div>
+</form>
 
 <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
@@ -106,7 +97,6 @@
 
 <form method="POST" id="delete-form"></form>
 <form method="POST" id="restore-form"></form>
-
 
 <style>
     /* Bảng hiệu ứng kính trong suốt */
@@ -183,29 +173,37 @@
         box-shadow: 0 20px 50px rgba(0, 0, 0, 0.1);
     }
 </style>
-
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+  
 <script>
     document.addEventListener('DOMContentLoaded', function () {
-        let courseId;
-        const deleteForm = document.getElementById('delete-form');
-        const restoreForm = document.getElementById('restore-form');
+        var courseId;
 
-        const btnDelete = document.getElementById('btnDelete');
-        const deleteModal = document.getElementById('deleteModal');
-        const btnRestore = document.getElementById('button-restore');
+        var deleteForm = document.getElementById('delete-form');
+        var restoreForm = document.getElementById('restore-form');
+        var containerForm = document.getElementById('container-form');
+
+
+        var btnDelete = document.getElementById('btnDelete');
+        var btnRestore = document.getElementById('button-restore');
+
+
+        var deleteModal = document.getElementById('deleteModal');
+
+        var checkboxAll = $('#check-box-all');
+        var courseItemCheckbox = $('input[name="coursesIds[]"]');
+        var checkAllSubmitBtn = $('.check-all-submit-btn');
+        var selectAction = $('.checkbox-select-all-options');
+        var errorMsg = $('.submit-error-msg');
+
 
         if (deleteModal) {
-            // 🚨 ĐOẠN CODE QUAN TRỌNG: Tự động bốc Modal ra ngoài body để sửa lỗi mờ/đơ màn hình
             document.body.appendChild(deleteModal);
-
-            // Lắng nghe sự kiện mở modal để lấy ID khóa học
             deleteModal.addEventListener('show.bs.modal', function (event) {
                 const button = event.relatedTarget;
                 courseId = button.getAttribute('data-id');
             });
         }
-
-        // Xử lý sự kiện click nút xác nhận xóa
         if (btnDelete && deleteForm) {
             btnDelete.addEventListener('click', function () {
                 deleteForm.action = '/courses/' + courseId + '/force?_method=DELETE';
@@ -213,20 +211,88 @@
             });
         }
 
-        document.addEventListener('click', function (e) {
-            // Kiểm tra nếu click trúng nút có class là 'btn-restore' (hoặc class bạn tự đặt)
-            if (e.target && e.target.classList.contains('btn-restore')) {
-                // Lấy id từ thuộc tính data-id của chính nút khôi phục đó
-                e.preventDefault();
-                const restoreId = e.target.getAttribute('data-id');
-                console.log(restoreId);
 
-                if (restoreForm && restoreId) {
-                    // Thay đổi action của form khôi phục và submit
-                    restoreForm.action = '/courses/' + restoreId + '/restore?_method=PATCH';
-                    restoreForm.submit();
-                }
+        if (btnRestore && restoreForm) {
+            $(document).on('click', '.btn-restore-single', function (e) {
+            e.preventDefault();
+            var courseCheckboxes = $('input[name="coursesIds[]"]');
+          
+            var restoreId = $(this).data('id');
+            console.log("Đang khôi phục khóa học có ID:", restoreId);
+            if (restoreForm && restoreId) {
+                e.preventDefault();
+                // Thay đổi action của form khôi phục và submit lên server
+                restoreForm.action = '/courses/' + restoreId + '/restore?_method=PATCH';
+                restoreForm.submit();
+            } else {
+                console.log("Không tìm thấy restoreForm hoặc restoreId!");
             }
+        }
+        );
+        }
+      
+
+        /////////////////////
+
+        checkboxAll.change(function () {
+            var ischeckedAll = $(this).prop('checked');
+            $('input[name="coursesIds[]"]').prop('checked', ischeckedAll);
+            renderCheckallSubmit();
         });
+
+        // 2. Xử lý khi người dùng tích lẻ từng ô trong bảng (Dùng Sự kiện ủy quyền - Event Delegation)
+        $(document).on('change', 'input[name="coursesIds[]"]', function () {
+            var courseCheckboxes = $('input[name="coursesIds[]"]');
+            var totalCheckboxes = courseCheckboxes.length;
+            var checkedCheckboxes = courseCheckboxes.filter(':checked').length;
+            var ischeckedAll = totalCheckboxes === checkedCheckboxes;
+            checkboxAll.prop('checked', ischeckedAll);
+            renderCheckallSubmit();
+        });
+
+        
+        selectAction.change(function () {
+            renderCheckallSubmit();
+        });
+
+        //render chaeck button
+        function renderCheckallSubmit() {
+            var checkedCheckboxes = $('input[name="coursesIds[]"]:checked').length;
+            var actionValue = $('.checkbox-select-all-options').val();
+            if (checkedCheckboxes > 0 && actionValue) {
+                checkAllSubmitBtn.removeClass('disabled');
+            }
+            else {
+                checkAllSubmitBtn.addClass('disabled');
+            }
+        }
+
+        checkAllSubmitBtn.click(function (e) {
+            e.preventDefault();
+            var isSubmitable = !$(this).hasClass('disabled');
+            var actionValue = $('.checkbox-select-all-options').val();
+            var checkedCheckboxes = $('input[name="coursesIds[]"]:checked').length;
+
+            if (isSubmitable && actionValue && checkedCheckboxes > 0 ) {
+                errorMsg.hide(); // Ẩn thông báo lỗi nếu thao tác đúng
+                console.log("Nút hợp lệ! Tiến hành submit form.");
+                containerForm.submit();
+            } else {
+                var message = "";
+                if (checkedCheckboxes === 0 && !actionValue) {
+                    message = "⚠️ Vui lòng chọn ít nhất 1 khóa học và chọn hành động!";
+                } else if (checkedCheckboxes === 0) {
+                    message = "⚠️ Vui lòng tích chọn các khóa học cần xử lý!";
+                } else if (!actionValue) {
+                    message = "⚠️ Vui lòng chọn hành động cụ thể ở danh sách thả xuống!";
+                } else {
+                    message = "⚠️ Thao tác chưa hợp lệ, vui lòng kiểm tra lại!";
+                }
+
+                console.log("Nút không hợp lệ: " + message);
+                errorMsg.text(message).stop().fadeIn(); // Hiển thị text lỗi mượt mà
+            };
+        });
+
     });
 </script>

@@ -1,5 +1,4 @@
-<div class="mt-4">
-
+<form id="container-form" method="POST" class="mt-4" action="/courses/handle-form-action">
     <head>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     </head>
@@ -11,16 +10,28 @@
                 <i class="fa-solid fa-trash fas fa-trash-alt mr-2"></i> Thùng rác [{{deletedCount}}] <i
                     class="fa-solid"></i>
             </a>
+            <div class="mt-4 mb-3 mr-auto" style="max-width: 600px;">
+                <div class="input-group input-group d-flex align-items-start ">
+                    <div class="input-group-text">
+                        <input class="form-check-input mt-0" type="checkbox" id="check-box-all" value="">
+                        <label class="form-check-label ms-2" for="check-box-all">Chọn tất cả</label>
+                    </div>
 
+                    <select class="form-select checkbox-select-all-options" name="action" aria-label="Select menu example" required>
+                        <option selected disabled>-- Chọn hành động --</option>
+                        <option value="DELETE">Xóa</option>
+                    </select>
+                    <button class="btn btn-primary disabled check-all-submit-btn" type="button">Thực thi</button>
+                    <div class="submit-error-msg" style="color: #dc3545; font-size: 14px; display: none; font-weight: 500;"></div>
 
+                </div>
+            </div>
         </div>
-
-
         <div class="table-responsive table-glass-container">
             <table class="table table-hover align-middle mb-0">
                 <thead>
                     <tr>
-                        <th scope="col" style="width: 80px;">#</th>
+                        <th scope="col" style="width: 80px;" colspan="2">#</th>
                         <th scope="col">Tên khóa học</th>
                         <th scope="col" style="width: 150px;">Trình độ</th>
                         <th scope="col" style="width: 200px;">Ngày tạo</th>
@@ -30,6 +41,12 @@
                 <tbody>
                     {{#each courses}}
                     <tr>
+                        <td>
+                            <div class="input-group-text">
+                                <input class="form-check-input mt-0" type="checkbox" name="coursesIds[]"
+                                    value="{{this._id}}">
+                            </div>
+                        </td>
                         <td class="text-muted fw-bold">{{sum @index 1}}</td>
                         <td class="fw-semibold text-dark">{{this.name}}</td>
                         <td>
@@ -61,8 +78,7 @@
         </div>
 
     </div>
-</div>
-
+</form>
 <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content modal-glass">
@@ -80,9 +96,7 @@
         </div>
     </div>
 </div>
-
 <form method="POST" id="delete-form"></form>
-
 <style>
     /* Bảng hiệu ứng kính trong suốt */
     .table-glass-container {
@@ -174,31 +188,93 @@
         box-shadow: 0 20px 50px rgba(0, 0, 0, 0.1);
     }
 </style>
-
 <script>
     document.addEventListener('DOMContentLoaded', function () {
-        let courseId;
-        const deleteForm = document.getElementById('delete-form');
-        const btnDelete = document.getElementById('btnDelete');
-        const deleteModal = document.getElementById('deleteModal');
+        var courseId;
+
+        var deleteForm = document.getElementById('delete-form');
+        var containerForm = document.getElementById('container-form');
+
+        var btnDelete = document.getElementById('btnDelete');
+
+        var deleteModal = document.getElementById('deleteModal');
+
+        var checkboxAll = $('#check-box-all');
+        var courseItemCheckbox = $('input[name="coursesIds[]"]');
+        var checkAllSubmitBtn = $('.check-all-submit-btn');
+        var selectAction = $('.checkbox-select-all-options');
+        var errorMsg = $('.submit-error-msg');
 
         if (deleteModal) {
-            // 🚨 ĐOẠN CODE QUAN TRỌNG: Tự động bốc Modal ra ngoài body để sửa lỗi mờ/đơ màn hình
             document.body.appendChild(deleteModal);
-
-            // Lắng nghe sự kiện mở modal để lấy ID khóa học
             deleteModal.addEventListener('show.bs.modal', function (event) {
                 const button = event.relatedTarget;
                 courseId = button.getAttribute('data-id');
             });
         }
-
-        // Xử lý sự kiện click nút xác nhận xóa
         if (btnDelete && deleteForm) {
             btnDelete.addEventListener('click', function () {
                 deleteForm.action = '/courses/' + courseId + '/delete?_method=DELETE';
                 deleteForm.submit();
             });
         }
+
+        //////////////////////
+        checkboxAll.change(function () {
+            var ischeckedAll = $(this).prop('checked');
+            $('input[name="coursesIds[]"]').prop('checked', ischeckedAll);
+            renderCheckallSubmit();
+        });
+        $(document).on('change', 'input[name="coursesIds[]"]', function () {
+            var courseCheckboxes = $('input[name="coursesIds[]"]');
+            var totalCheckboxes = courseCheckboxes.length;
+            var checkedCheckboxes = courseCheckboxes.filter(':checked').length;
+            var ischeckedAll = totalCheckboxes === checkedCheckboxes;
+            checkboxAll.prop('checked', ischeckedAll);
+            renderCheckallSubmit();
+        });
+
+        selectAction.change(function () {
+            renderCheckallSubmit();
+        });
+
+        checkAllSubmitBtn.click(function (e) {
+            e.preventDefault();
+            var isSubmitable = !$(this).hasClass('disabled');
+            var actionValue = $('.checkbox-select-all-options').val();
+            var checkedCheckboxes = $('input[name="coursesIds[]"]:checked').length;
+
+            if (isSubmitable && actionValue && checkedCheckboxes > 0 ) {
+                errorMsg.hide(); // Ẩn thông báo lỗi nếu thao tác đúng
+                console.log("Nút hợp lệ! Tiến hành submit form.");
+                containerForm.submit();
+            } else {
+                var message = "";
+                if (checkedCheckboxes === 0 && !actionValue) {
+                    message = "⚠️ Vui lòng chọn ít nhất 1 khóa học và chọn hành động!";
+                } else if (checkedCheckboxes === 0) {
+                    message = "⚠️ Vui lòng tích chọn các khóa học cần xử lý!";
+                } else if (!actionValue) {
+                    message = "⚠️ Vui lòng chọn hành động cụ thể ở danh sách thả xuống!";
+                } else {
+                    message = "⚠️ Thao tác chưa hợp lệ, vui lòng kiểm tra lại!";
+                }
+
+                console.log("Nút không hợp lệ: " + message);
+                errorMsg.text(message).stop().fadeIn(); // Hiển thị text lỗi mượt mà
+            };
+        });
+
+        function renderCheckallSubmit() {
+            var checkedCheckboxes = $('input[name="coursesIds[]"]:checked').length;
+            var actionValue = $('.checkbox-select-all-options').val();
+            if (checkedCheckboxes > 0 && actionValue) {
+                checkAllSubmitBtn.removeClass('disabled');
+            }
+            else {
+                checkAllSubmitBtn.addClass('disabled');
+            }
+        }
     });
 </script>
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>

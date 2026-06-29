@@ -67,15 +67,37 @@ class CourseController {
   }
   // [Patch] /courses/:id/restore?_method=Patch
   restore(req, res, next) {
-    Course.restore({ _id: req.params.id, deleted: true })
-      .then(() => res.redirect("back"))
-      .catch(next);
+    console.log(req.params.id);
+    Course.restore({ _id: req.params.id })
+      .then(() => {
+        res.redirect("back");
+      })
+      .catch();
   }
   // [DELETE] /courses/:id/force
   force(req, res, next) {
     Course.deleteOne({ _id: req.params.id })
       .then(() => res.redirect("back"))
       .catch(next);
+  }
+  //method="POST" class="mt-4"  action="/courses/handle-form-action">
+  handleFormAction(req, res, next) {
+    switch (req.body.action) {
+      case "DELETE":
+        Course.delete({ _id: { $in: req.body.coursesIds } })
+          .then(() => res.redirect("back"))
+          .catch(next);
+        break;
+      case "RESTORE":
+        Course.restore({
+          _id: { $in: req.body.coursesIds },
+        })
+          .then(() => res.redirect("back"))
+          .catch(next);
+        break;
+      default:
+        res.json({ message: "Action is invalid" });
+    }
   }
 }
 module.exports = new CourseController();

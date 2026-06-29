@@ -3,7 +3,8 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "node --inspect src/index.js",
+    "start": "node --inspect --watch src/index.js",
+    "test":"node src/index.js",
     "watch": "sass -w src/resource/scss/:src/public/css/",
     "seed": "node src/config/seed.js",
     "killport": " netstat -ano | findstr :3000 ",

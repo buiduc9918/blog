@@ -3,7 +3,10 @@ const router = express.Router();
 const courseController = require('../app/controllers/CourseController');
 
 router.post('/store', courseController.store);
+router.post('/handle-form-action',courseController.handleFormAction);
+
 router.get('/creat', courseController.creat);
+
 router.put('/:id', courseController.update);
 router.delete('/:id/delete', courseController.destroy);
 router.patch('/:id/restore', courseController.restore);
