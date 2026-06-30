@@ -9,7 +9,17 @@ class MeController {
   }
   // [GET] /me
   stored(req, res, next) {
-    Promise.all([Course.find({ deleted: false }),Course.countDocumentsDeleted()])
+    let courses = Course.find({ deleted: false });
+
+   
+
+    if(req.query.hasOwnProperty('_sort')){
+      courses = courses.sort({
+        [req.query.column]:req.query.type,
+
+      });
+    }
+    Promise.all([courses,Course.countDocumentsDeleted()])
     .then(([courses,deletedCount])=>{
        res.render("me/stored", {
           deletedCount,

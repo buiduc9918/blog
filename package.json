@@ -3,14 +3,15 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "nodemon --inspect --watch src/index.js",
-    "test":"node src/index.js",
+    "start": "nodemon --inspect src/index.js",
+    "test": "node src/index.js",
     "watch": "sass -w src/resource/scss/:src/public/css/",
     "seed": "node src/config/seed.js",
     "killport": " netstat -ano | findstr :3000 ",
     "kill": "npx kill-port 3000"
   },
   "dependencies": {
+    "@primer/octicons-react": "^19.29.1",
     "cookie-parser": "~1.4.4",
     "debug": "~2.6.9",
     "express": "~4.16.1",

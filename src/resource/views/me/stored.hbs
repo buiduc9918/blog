@@ -1,7 +1,12 @@
 <form id="container-form" method="POST" class="mt-4" action="/courses/handle-form-action">
     <head>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+        <link rel="stylesheet" href="https://unpkg.com/@primer/octicons/build/build.css">
+        <link href="/open-iconic/font/css/open-iconic-bootstrap.css" rel="stylesheet">
+
     </head>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+
     <div>
         <div>
             <h3 class="mb-4 text-dark fw-bold">📚 Khóa học của tôi</h3>
@@ -27,14 +32,28 @@
                 </div>
             </div>
         </div>
+
+
+        {{!-- {{_sort.type}} --}}
         <div class="table-responsive table-glass-container">
             <table class="table table-hover align-middle mb-0">
                 <thead>
                     <tr>
                         <th scope="col" style="width: 80px;" colspan="2">#</th>
-                        <th scope="col">Tên khóa học</th>
-                        <th scope="col" style="width: 150px;">Trình độ</th>
-                        <th scope="col" style="width: 200px;">Ngày tạo</th>
+                        <th scope="col">
+                            Tên khóa học
+
+                            {{{sortable 'name' _sort}}}
+                            {{!-- <a href="?_sort&column=name&type=desc">
+                               <span class="oi oi-elevator"></span>
+                            </a> --}}
+                        </th>
+                        <th scope="col" style="width: 150px;">Trình độ
+                              {{{sortable 'level' _sort}}}
+                        </th>
+                        <th scope="col" style="width: 200px;">Ngày tạo
+                              {{{sortable 'createdAt' _sort}}}
+                        </th>
                         <th scope="col" style="width: 180px;" class="text-end">Hành động</th>
                     </tr>
                 </thead>
@@ -100,7 +119,7 @@
 <style>
     /* Bảng hiệu ứng kính trong suốt */
     .table-glass-container {
-        background: rgba(255, 255, 255, 0.45);
+        background: rgba(248, 247, 247, 0.45);
         backdrop-filter: blur(10px);
         -webkit-backdrop-filter: blur(10px);
         border: 1px solid rgba(255, 255, 255, 0.4);
@@ -110,8 +129,8 @@
     }
 
     .table th {
-        background-color: rgba(45, 55, 72, 0.9) !important;
-        color: #ffffff !important;
+        background-color: rgba(243, 243, 245, 0.9) !important;
+        color: #160505 !important;
         font-weight: 500;
         padding: 14px 20px;
         border: none;
@@ -277,4 +296,3 @@
         }
     });
 </script>
-<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
