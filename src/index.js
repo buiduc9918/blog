@@ -7,7 +7,7 @@ const app = express();
 const port = 3000;
 const route = require("./routes/index");
 const db = require("./config/db");
-const SortMiddleware = require('./app/middlewares/sortMiddleware.x');
+const SortMiddleware = require('./app/middlewares/sortMiddleware');
 
 // Connect to DB
 db.connect();
