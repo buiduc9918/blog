@@ -18,17 +18,21 @@ class MeController {
     }).catch(next);
   }
   // [GET] /me/trash/courses
-  async trash(req, res, next) {
-    try {
-      // Sử dụng findDeleted thay vì find thông thường
-      const deletedCourses = await Course.findDeleted({}).lean();
-      return res.render("me/trash", {
-        courses: deletedCourses,
+  trash(req, res, next) {
+  Promise.all([
+    Course.findDeleted({}).lean(), // Thêm {} vào đây để an toàn
+    Course.countDocuments({deleted: false})       // Đếm các bản ghi chưa xóa
+  ])
+    .then(([courses, documentsnodeleted]) => {
+      console.log("Số lượng chưa xóa:", documentsnodeleted);
+      return res.render("me/trash", { 
+
+        courses, 
+        documentsnodeleted 
       });
-    } catch (error) {
-      next(error);
-    }
-  }
+    })
+    .catch(next);
+}
 }
 
 module.exports = new MeController();

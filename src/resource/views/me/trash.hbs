@@ -5,7 +5,9 @@
     <div>
         <div>
             <h3 class="mb-4 text-dark fw-bold">📚 Khóa học đã khóa</h3>
-            <a class="btn btn-sm btn-success mt-2" href="/me">Danh sách khóa học</a>
+        <a class="btn btn-sm btn-success mt-2" href="/me">
+            Danh sách khóa học {{#if documentsnodeleted}}({{documentsnodeleted}}){{/if}}
+        </a>
         </div>
         <div class="mt-4 mb-3 mr-auto" style="max-width: 600px;">
             <div class="input-group input-group d-flex align-items-start ">
@@ -17,7 +19,7 @@
                     <option selected disabled>-- Chọn hành động --</option>
                     <option value="RESTORE">Khôi phục</option>
                 </select>
-                <button class="btn btn-primary check-all-submit-btn " type="button">Thực thi</button>
+                <button class="btn btn-primary disabled check-all-submit-btn " type="button">Thực thi</button>
                 <div class="submit-error-msg" style="color: #dc3545; font-size: 14px; display: none; font-weight: 500;"></div>
 
             </div>
