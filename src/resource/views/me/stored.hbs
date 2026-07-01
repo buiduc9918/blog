@@ -39,10 +39,15 @@
             <table class="table table-hover align-middle mb-0">
                 <thead>
                     <tr>
-                        <th scope="col" style="width: 80px;" colspan="2">#</th>
+                        <th scope="col" colspan="2">
+                            ID khóa học
+                            {{{sortable '_id' _sort}}}
+                            {{!-- <a href="?_sort&column=name&type=desc">
+                               <span class="oi oi-elevator"></span>
+                            </a> --}}
+                        </th>
                         <th scope="col">
                             Tên khóa học
-
                             {{{sortable 'name' _sort}}}
                             {{!-- <a href="?_sort&column=name&type=desc">
                                <span class="oi oi-elevator"></span>
@@ -66,7 +71,7 @@
                                     value="{{this._id}}">
                             </div>
                         </td>
-                        <td class="text-muted fw-bold">{{sum @index 1}}</td>
+                        <td class="text-muted text-dark fw-bold">{{this._id}}</td>
                         <td class="fw-semibold text-dark">{{this.name}}</td>
                         <td>
                             <span class="badge badge-custom bg-primary bg-opacity-10">

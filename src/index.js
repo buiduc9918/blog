@@ -27,6 +27,7 @@ app.use(methodOverride('_method'));
 app.use(SortMiddleware);
 
 app.use(morgan("combined"));
+
 app.engine(".hbs", handlebars.engine({ 
   extname: ".hbs",
   helpers: require("./helpers/handlebars")

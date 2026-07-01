@@ -2,9 +2,12 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 const mongooseDelete = require("mongoose-delete");
 const slugify = require("slugify");
+const AutoIncrement = require('mongoose-sequence')(mongoose);
+
 
 const Course = new Schema(
   {
+    _id: { type: Number},
     name: { type: String, maxlength: 200 },
     slug: { type: String, maxlength: 200, unique: true, index: true },
     description: { type: String, maxlength: 500 },
@@ -13,9 +16,13 @@ const Course = new Schema(
     videoID: { type: String, maxlength: 200 },
   },
   {
+    _id: false,
     timestamps: true,
   },
 );
+
+Course.plugin(AutoIncrement, { inc_field: 'id' });
+
 Course.plugin(mongooseDelete, {
   overrideMethods: "all",
   deletedAt: true,

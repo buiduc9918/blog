@@ -26,19 +26,25 @@ class CourseController {
       .catch(next);
   }
   // [POST] /courses/store
-  async store(req, res, next) {
-    try {
-      const course = new Course(req.body);
-      course.image =
-        "http://img.youtube.com/vi/" + course.videoID + "/maxresdefault.jpg";
-      await course.save();
-      res.redirect("/me/");
-    } catch (error) {
-      next(error);
-    }
+  store(req, res, next) {
+    req.body.image =
+      `http://img.youtube.com/vi/${req.body.videoID}/maxresdefault.jpg`;
+
+   // Dùng findWithDeleted để tìm thấy cả các khóa học đã bị xóa mềm trước đó
+    Course.findWithDeleted({})
+        .sort({ _id: -1 })
+        .limit(1)
+        .then((courses) => {
+            const lastCourse = courses[0];
+            req.body._id = lastCourse ? lastCourse._id + 1 : 1;
+            const course = new Course(req.body);
+            return course.save();
+        })
+        .then(() => res.redirect("/me/stored/courses"))
+        .catch(next);
   }
   // [Post] /courses/::id/edit
-  edit(req, res, next) {
+   edit(req, res, next) {
     const query = req.params.id;
     const filter = { _id: query };
     Course.find(filter)
