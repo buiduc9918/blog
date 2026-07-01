@@ -1,170 +1,95 @@
-Bước 1: Tạo file JS điều hành ứng dụng
-- Định nghĩa các biến cơ bản:
-  + const: hằng số dùng để khai báo thư viện
-  + port: cổng chạy ứng dụng
-  + express: thư viện backend chính
-  + node: môi trường chạy JavaScript phía server
-- Tạo file `package.json` để khai báo thư viện và phụ thuộc
-- `package-lock.json` lưu cấu hình phiên bản phụ thuộc chính xác
+Các bước xây dựng web blog khóa học bằng Node.js, Express, MongoDB và Handlebars
 
-Bước 2: Cài đặt thư viện cơ bản
-- Cài Express:
-  npm i express
-- Thêm `path` để xử lý đường dẫn file
-- Cài các thư viện hỗ trợ:
-  + morgan: ghi log HTTP
-  + express-handlebars: template engine
-  + nodemon: tự động reload khi lưu code
-  + sass: biên dịch SCSS sang CSS
-  + prettier: định dạng code
-  + lint-staged: chạy prettier trước khi commit
-  + husky: chạy lint-staged khi push/commit
-  + http-errors, jade: debug và xử lý lỗi
-  + mongoose: kết nối database với model/controller
+1. Khởi tạo dự án
+- Tạo thư mục dự án và chạy lệnh: npm init -y
+- Cài các package cần thiết:
+  - npm install express mongoose hbs cookie-parser method-override slugify
+  - npm install --save-dev nodemon morgan express-handlebars sass prettier husky lint-staged
+- Tạo file package.json với các script hữu ích:
+  - npm start: chạy server bằng nodemon
+  - npm run watch: theo dõi SCSS
+  - npm run seed: chèn dữ liệu mẫu vào MongoDB
 
-Lưu ý khi cài đặt:
-- Phân loại gói cho môi trường khác nhau:
-  + dependencies: thư viện dùng ở production
-  + devDependencies: công cụ chỉ dùng khi phát triển
+2. Tổ chức thư mục theo mô hình MVC
+- src/index.js: điểm khởi chạy ứng dụng
+- src/routes/: định nghĩa route cho các trang
+- src/app/controllers/: xử lý logic cho từng route
+- src/app/model/: định nghĩa schema và model MongoDB
+- src/config/db/: kết nối database
+- src/resource/views/: giao diện Handlebars
+- src/public/: file tĩnh như CSS, ảnh, JS
+- src/resource/scss/: file SCSS để viết style
 
-Bước 3: Tổ chức cấu trúc thư mục theo `src`
-Trong `src` nên có:
-- `app/`: cấu hình và khởi tạo ứng dụng, kết nối database
-- `config/`: cấu hình database và môi trường
-- `public/`: chứa file tĩnh như CSS, ảnh, JavaScript client
-- `resource/`: chứa file giao diện
-- `routes/`: định nghĩa các đường dẫn
+3. Kết nối MongoDB
+- Cài MongoDB và đảm bảo dịch vụ đang chạy
+- Tạo kết nối trong src/config/db/index.js
+- Dùng mongoose.connect() để kết nối tới database
+- Nếu cần, dùng seed để tạo dữ liệu mẫu cho trang chủ và khóa học
 
-Bước 4: Phân chia chức năng MVC
-- `app`:
-  + `controllers/`: xử lý các action theo route
-  + `model/`: định nghĩa cấu trúc dữ liệu và truy vấn database
-- `config`:
-  + cấu hình database và môi trường ứng dụng
-- `public`:
-  + `css/`: lưu file giao diện CSS
-  + `image/`, `sound/`: lưu ảnh, âm thanh và tài nguyên tĩnh khác
-- `resource`:
-  + `scss/`: chứa file SCSS và biến giao diện
-  + `views/`: chứa template view và layout
-    * layout chính (`main`) chứa phần header/footer và body
-    * template con sẽ được chèn vào `{{{body}}}`
+4. Xây dựng route và controller
+- Tạo route cho trang chủ, chi tiết khóa học, tạo khóa học, sửa, xóa
+- Controller nhận request, truy vấn database, rồi render view bằng Handlebars
+- Luôn kiểm tra đầu vào và xử lý lỗi một cách rõ ràng
 
-Ví dụ cấu trúc layout Handlebars:
-  {{> header}}
-  <div class="container">
-    {{{body}}}
-  </div>
-  {{> footer}}
+5. Thiết kế giao diện
+- Dùng Handlebars để chia layout, header, footer và các partials
+- Dùng SCSS để quản lý style thay vì viết trực tiếp CSS dài dòng
+- Chia nhỏ giao diện thành các component và template dễ bảo trì
 
-Với Bootstrap, thêm các script cần thiết vào layout:
-  <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.min.js"></script>
+6. Thêm dữ liệu và chức năng nâng cao
+- Tạo model Course với các trường như name, description, image, videoID, slug
+- Dùng slugify để tạo URL thân thiện
+- Thêm chức năng xem chi tiết khóa học và hiển thị video bằng iframe
 
-Bước 5: Hiểu cách hoạt động của web và routing
-- Hiểu `req`, `res` trong HTTP
-- Hiểu cách dữ liệu chạy giữa client và server
-- Ví dụ: `http://localhost/news?abc=...` dùng query để tìm kiếm
+7. Kiểm tra và chạy ứng dụng
+- Cài đặt dependencies: npm install
+- Seed dữ liệu mẫu: node src/config/seed.js hoặc npm run seed
+- Chạy app: npm start
+- Mở trình duyệt tại: http://localhost:3000
 
-Bước 6: Thiết lập mô hình MVC
-- Model View Controller:
-  + Controller giao tiếp với Browser qua router và dispatcher
-  + Router định nghĩa đường dẫn đến action
-- Cấu trúc ứng dụng:
-  + `src/index.js`: điểm vào chính của server
-  + `config/db/`: cấu hình kết nối database
-  + `resource/` và `public/`: chứa view và file tĩnh
-  + `routes/`: điều hướng các link của web
-  + `app/`: điều hướng dữ liệu, lấy dữ liệu từ DB và render view
-  + `src/app/controllers`: chứa controller xử lý logic
+8. Quy trình Git và commit
+- Kiểm tra thay đổi: git status
+- Thêm file vào staging: git add .
+- Commit theo chuẩn rõ nghĩa:
+  - feat: thêm tính năng mới
+  - fix: sửa lỗi
+  - chore: chỉnh sửa cấu hình hoặc tiện ích
+  - style: chỉnh giao diện
+  - docs: cập nhật tài liệu
+- Ví dụ:
+  - git commit -m "feat: add course detail page"
+  - git commit -m "fix: resolve course render error"
+  - git commit -m "docs: update project readme"
+- Đẩy lên remote:
+  - git push origin main
 
-Bước 7: Ví dụ `package.json`
-{
-  "name": "blog",
-  "version": "0.0.0",
-  "private": true,
-  "scripts": {
-    "start": "nodemon --inspect src/index.js",
-    "watch": "sass -w src/resource/scss/:src/public/css/"
-  },
-  "dependencies": {
-    "cookie-parser": "~1.4.4",
-    "debug": "~2.6.9",
-    "express": "~4.16.1",
-    "http-errors": "~1.6.3",
-    "jade": "~1.11.0",
-    "mongoose": "^9.7.1"
-  },
-  "devDependencies": {
-    "express-handlebars": "^9.0.1",
-    "husky": "^9.1.7",
-    "lint-staged": "^17.0.7",
-    "morgan": "^1.11.0",
-    "nodemon": "^3.1.14",
-    "prettier": "^3.8.4",
-    "sass": "^1.101.0"
-  },
-  "lint-staged": {
-    "src/**/*.{js,json}": "prettier --tab-width 4 --write --single-quote --trailing-comma all"
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged"
-    }
-  }
-}
+9. Gợi ý workflow làm việc hàng ngày
+- Tạo nhánh mới cho từng task: git checkout -b feature/ten-tinh-nang
+- Làm việc trên nhánh riêng, commit nhỏ và rõ ràng
+- Trước khi push, kiểm tra lại bằng git status và git diff
+- Nếu cần, merge nhánh vào main sau khi review
 
-Bước 8: Ví dụ `src/index.js`
-const path = require('path');
-const express = require('express');
-const morgan = require('morgan');
-const handlebars = require('express-handlebars');
-const app = express();
-const port = 3000;
-const route = require('./routes/index');
-const db = require('./config/db');
+10. Lưu ý quan trọng
+- Đảm bảo MongoDB đang chạy trước khi khởi động ứng dụng
+- Nếu thiếu package thì cài lại bằng npm install <package>
+- Luôn giữ code sạch, comment hợp lý và commit đúng mục đích
 
-// Connect to DB
-db.connect();
+11. Các mốc hoàn thành đã thực hiện
+- 2026-07-01: Hoàn thiện khóa học Node.js, xử lý các tính năng chính của web và chuẩn hóa cấu trúc project
+- 2026-07-01: Thiết lập thành công sắp xếp nhiều cột và cải thiện bố cục giao diện
+- 2026-07-01: Sửa lỗi và hoàn thiện một số vấn đề về render/logic
+- 2026-06-30: Tìm hiểu thêm về Handlebars, middleware và tích hợp open-iconic
+- 2026-06-30: Thêm tính năng hoàn thiện sơ khóa học và điều chỉnh cấu trúc dữ liệu
+- 2026-06-29: Hoàn thiện chức năng xóa và khôi phục nhiều mục
+- 2026-06-27: Học thêm cách dùng Node.js và làm quen với quy trình phát triển
 
-app.use(express.static(path.join(__dirname, 'public')));
-app.use(express.urlencoded({ extended: true }));
-app.use(express.json());
-app.use(morgan('combined'));
-app.engine('.hbs', handlebars.engine({ extname: '.hbs' }));
-app.set('view engine', 'hbs');
-app.set('views', path.join(__dirname, 'resource/views'));
-
-// Route init
-route(app);
-
-app.listen(port, () => {
-  console.log(`Example app listening on port http://localhost:${port}`);
-});
-
-Bước 9: Tóm tắt các bước vừa làm
-- Sửa `SiteController.index()` để lấy đúng dữ liệu từ MongoDB và chuyển đổi thành object.
-- Thêm phương thức `store()` để tạo khóa học mới bằng POST `/store`.
-- Thêm route `router.post('/store', siteController.store)` trong `src/routes/site.js`.
-- Tạo file seed `src/config/seed.js` và thêm script `npm run seed` vào `package.json`.
-- Cập nhật dữ liệu mẫu với ảnh thực tế và sửa URL ảnh lỗi.
-- Thêm style SCSS cho header: nền đen và chữ trắng.
-- Đảm bảo CSS header được viết trong `src/resource/scss/app.scss` thay vì chỉ chỉnh trong file biên dịch.
-Buoc 10
-Ghi chú (2026-06-23):
-- Sửa `CourseController` để tránh lỗi render và trả đúng dữ liệu cho view.
-- Cập nhật model `src/app/model/Course.js`: thêm trường `videoID` (sửa lỗi gõ trước đó).
-- Cập nhật `src/config/seed.js`: thêm `videoID` cho từng course, tạo slug, và kết nối/đóng DB an toàn.
-- Cập nhật view `src/resource/views/courses/show.hbs`:
-  - Hiển thị `course.image` (thumbnail) và `course.name`.
-  - Sử dụng iframe động với `{{course.videoID}}`.
-  - Thêm hiệu ứng cho nút (pulse, icon slide/rotate, sparkles) và điều chỉnh vị trí nút/thumbnail.
-- Hướng dẫn kiểm tra nhanh:
-  1. Cài phụ thuộc: `npm install`
-  2. Seed dữ liệu: `node src/config/seed.js`
-  3. Chạy app: `npm start` rồi mở `http://localhost:3000/courses/<slug>`
-- Lưu ý: đảm bảo MongoDB đang chạy; nếu thiếu module (ví dụ `morgan`, `express-handlebars`) chạy `npm install <module>`.
-
-
+12. Lịch sử commit gần đây
+- ba96ddd | 2026-07-01 | Hoan thien khoa hoc nodejs
+- 419a820 | 2026-07-01 | thiet lap thanh cong sap sep nhieu column
+- bb40d98 | 2026-07-01 | loi xcc 1
+- 98bf849 | 2026-06-30 | trick
+- f4392b6 | 2026-06-30 | trick midle rename
+- 589eaf1 | 2026-06-30 | thêm dduocj sắp xếp hiểu thêm về handlebar thêm hàm handlerbar , them open-iconnic,phuong pháp middleware
+- 2ffab5e | 2026-06-30 | them tinh nawng hoien so khoa hoc
+- 88423bf | 2026-06-29 | hoan thien xoa nhieu khoi phuc nhieu
 
