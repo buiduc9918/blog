@@ -1,0 +1,169 @@
+[{
+  "_id": 1,
+  "name": "JavaScript Cơ Bản",
+  "slug": "javascript-co-ban",
+  "description": "Học lập trình JavaScript từ cơ bản đến nâng cao",
+  "level": "Beginner",
+  "image": "http://img.youtube.com/vi/0SJE9dYdpps/maxresdefault.jpg",
+  "videoID": "0SJE9dYdpps",
+  "createdAt": {
+    "$date": "2026-06-23T16:17:35.525Z"
+  },
+  "updatedAt": {
+    "$date": "2026-06-27T08:32:56.166Z"
+  },
+  "deleted": false,
+  "deletedAt": null,
+  "__v": 0
+},
+{
+  "_id": 2,
+  "name": "NodeJS Backend",
+  "slug": "nodejs-backend",
+  "description": "Xây dựng API backend với NodeJS và Express",
+  "level": "Intermediate",
+  "image": "https://images.viblo.asia/7da47988-21a4-45a2-a3d5-e650ca7d2bc6.png",
+  "videoID": "z2f7RHgvddc",
+  "createdAt": {
+    "$date": "2026-06-23T16:17:35.526Z"
+  },
+  "updatedAt": {
+    "$date": "2026-06-27T08:32:51.854Z"
+  },
+  "deleted": false,
+  "deletedAt": null,
+  "__v": 0
+},
+{
+  "_id": 3,
+  "name": "MongoDB Database",
+  "slug": "mongodb-database",
+  "description": "Quản lý dữ liệu với MongoDB và Mongoose",
+  "level": "Intermediate",
+  "image": "http://img.youtube.com/vi/KQOPq0oO_R8/maxresdefault.jpg",
+  "videoID": "KQOPq0oO_R8",
+  "createdAt": {
+    "$date": "2026-06-23T16:17:35.526Z"
+  },
+  "updatedAt": {
+    "$date": "2026-06-26T18:52:43.561Z"
+  },
+  "deleted": true,
+  "deletedAt": {
+    "$date": "2026-06-26T18:52:43.561Z"
+  },
+  "__v": 0
+},
+{
+  "_id": 4,
+  "name": "React Frontend",
+  "slug": "react-frontend",
+  "description": "Xây dựng giao diện với React",
+  "level": "Intermediate",
+  "image": "http://img.youtube.com/vi/NclbvXqvnyA/maxresdefault.jpg",
+  "videoID": "NclbvXqvnyA",
+  "createdAt": {
+    "$date": "2026-06-23T16:17:35.526Z"
+  },
+  "updatedAt": {
+    "$date": "2026-06-27T08:32:54.085Z"
+  },
+  "deleted": false,
+  "deletedAt": null,
+  "__v": 0
+},
+{
+  "_id": 5,
+  "name": "HTML & CSS",
+  "slug": "html-css",
+  "description": "Học HTML5 và CSS3 để tạo giao diện web",
+  "level": "Beginner",
+  "image": "http://img.youtube.com/vi/R6plN3FvzFY/maxresdefault.jpg",
+  "videoID": "R6plN3FvzFY",
+  "createdAt": {
+    "$date": "2026-06-23T16:17:35.526Z"
+  },
+  "updatedAt": {
+    "$date": "2026-06-27T08:32:57.933Z"
+  },
+  "deleted": false,
+  "deletedAt": null,
+  "__v": 0
+},
+{
+  "_id": 6,
+  "name": "Khóa học Python",
+  "slug": "khoa-hoc-python",
+  "description": "Khóa học Python cơ bản",
+  "level": "Beginner",
+  "image": "http://img.youtube.com/vi/NZj6LI5a9vc/maxresdefault.jpg",
+  "videoID": "NZj6LI5a9vc",
+  "createdAt": {
+    "$date": "2026-06-23T17:25:23.120Z"
+  },
+  "updatedAt": {
+    "$date": "2026-06-26T18:52:47.929Z"
+  },
+  "deleted": true,
+  "deletedAt": {
+    "$date": "2026-06-26T18:52:47.928Z"
+  },
+  "__v": 0
+},
+{
+  "_id": 8,
+  "name": "Code ứng dụng di động",
+  "slug": "code-ung-dung-di-dong",
+  "description": "Code ứng dụng di động siêu dễ trong 15 phút với JavaScript và React-Native",
+  "level": "Intermediate",
+  "image": "http://img.youtube.com/vi/uBGKrMzgY9E/maxresdefault.jpg",
+  "videoID": "uBGKrMzgY9E",
+  "createdAt": {
+    "$date": "2026-06-24T07:31:15.332Z"
+  },
+  "updatedAt": {
+    "$date": "2026-06-27T08:06:52.665Z"
+  },
+  "deleted": true,
+  "deletedAt": {
+    "$date": "2026-06-27T08:06:52.664Z"
+  },
+  "__v": 0
+},
+{
+  "_id": 9,
+  "name": "Unity",
+  "slug": "unity",
+  "description": "3D Survival Game Tutorial",
+  "level": "Intermediate",
+  "image": "http://img.youtube.com/vi/Nxg0vQk05os/maxresdefault.jpg",
+  "videoID": "Nxg0vQk05os",
+  "createdAt": {
+    "$date": "2026-06-24T07:42:13.645Z"
+  },
+  "updatedAt": {
+    "$date": "2026-06-27T08:49:25.875Z"
+  },
+  "deleted": true,
+  "deletedAt": {
+    "$date": "2026-06-27T08:49:25.874Z"
+  },
+  "__v": 0
+},
+{
+  "_id": 10,
+  "name": " Cách mình dùng AI để học và làm (2026): Gemini, Claude, Excel, Antigravity...",
+  "description": " Quy trình tự động điền hồ sơ và xử lý tệp tin văn phòng\r\n13:39 - Quản lý và truy xuất dữ liệu máy tính từ xa qua di động\r\n16:11 - Tích hợp Claude vào Excel để phân tích và lập công thức dữ liệu\r\n20:02 - Nâng cao hiệu suất lập trình với công cụ coding agent Anti-Gravity\r\n26:00 - Lập trình ứng dụng Native trên Xcode",
+  "level": "Advanced",
+  "image": "http://img.youtube.com/vi/Pni_hG0wD0o/maxresdefault.jpg",
+  "videoID": "Pni_hG0wD0o",
+  "deleted": false,
+  "createdAt": {
+    "$date": "2026-07-01T14:08:30.307Z"
+  },
+  "updatedAt": {
+    "$date": "2026-07-01T14:08:30.307Z"
+  },
+  "slug": "cach-minh-dung-ai-dje-hoc-va-lam-2026-gemini-claude-excel-antigravity",
+  "__v": 0
+}]
