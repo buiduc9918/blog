@@ -20,7 +20,15 @@ Course.plugin(mongooseDelete, {
   overrideMethods: "all",
   deletedAt: true,
 });
-
+///custom query helper
+Course.query.sortable = function (req) {
+  if (req.query.hasOwnProperty("_sort")) {
+    const isValidType = ["asc", "desc"].includes(req.query.type?.toLowerCase());
+    const sortOrder = isValidType ? req.query.type : "desc";
+    return this.sort({ [req.query.column]: sortOrder });
+  }
+  return this;
+}
 Course.pre("save", function (next) {
   this.slug = slugify(this.name, {
     lower: true,
