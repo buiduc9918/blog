@@ -19,7 +19,7 @@
     "http-errors": "~1.6.3",
     "jade": "~1.11.0",
     "method-override": "^3.0.0",
-    "mongoose": "^9.7.1",
+    "mongoose": "^9.8.1",
     "mongoose-delete": "^1.0.7",
     "mongoose-sequence": "^6.0.1",
     "slugify": "^1.6.9"
